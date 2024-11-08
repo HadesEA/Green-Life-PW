@@ -1,0 +1,44 @@
+body{
+    margin: 0;
+    font-family: sans-serif;
+    background-color: #ccc;
+}
+
+.header__nav{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 120px;
+    background-color: #4a1;
+}
+
+.nav__list{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    gap: 70px;
+}
+
+.nav__list1{
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin: 0;
+    font-size: 36px;
+    gap: 20px;
+}
+
+.logo{
+    height: 80px;
+}
+
+.item__link{
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    font-style: normal;
+}
+
+#p1{
+    margin: 0;
+}
