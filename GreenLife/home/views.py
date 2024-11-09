@@ -6,7 +6,6 @@ from django.views import generic
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.models import User
 
-from home.forms import SignUpForm
 # Create your views here.
 
 
@@ -23,29 +22,6 @@ class index(generic.View):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("home:index")
-        else:
-            return redirect("home:index")
-
-
-class LogOut(generic.View):
-    def get(self, request):
-        logout(request)
-        return redirect("home:index")
-    
-class SignUp(generic.CreateView):
-    template_name = "home/signup.html"
-    model = User
-    form_class = SignUpForm
-    success_url = reverse_lazy("home:index")
-
-    def form_valid(self, form):
-        form.save()
-        username = form.cleaned_data.get("username")
-        password = form.cleaned_data.get("password1")
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            login(self.request, user)
             return redirect("home:index")
         else:
             return redirect("home:index")

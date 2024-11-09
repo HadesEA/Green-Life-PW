@@ -20,6 +20,4 @@ from home import views
 
 urlpatterns = [
     path('', views.index.as_view(), name="index"),
-    path('logout/', views.LogOut.as_view(), name="logout"),
-    path('signup/', views.SignUp.as_view(), name="signup"),
 ]
