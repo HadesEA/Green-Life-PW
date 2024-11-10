@@ -26,6 +26,8 @@ class index(generic.View):
         else:
             return redirect("home:index")
 
+def graphics(request):
+    return render(request, 'home/graphics.html')
 
 def get_chart(_request):
     serie=[]

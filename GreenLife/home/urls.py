@@ -6,5 +6,6 @@ app_name = 'home'
 urlpatterns=[
     path('admin/', admin.site.urls),
     path('', views.index.as_view(), name="index"),
-    path('get_chart/', views.get_chart, name='get_chart')
+    path('get_chart/', views.get_chart, name='get_chart'),
+    path('graphics/', views.graphics, name='graphics'),
 ]

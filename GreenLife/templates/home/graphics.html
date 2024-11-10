@@ -17,15 +17,15 @@
         </p>
         </ul>
         <ul class="nav__list">
-            <li class="list__item"><a href="" class="item__link">Home</a></li>
-            <li class="list__item"><a href="{% url 'home:graphics'%}" class="item__link">Graphics</a></li>
+            <li class="list__item"><a href="index.html" class="item__link">Home</a></li>
+            <li class="list__item"><a href="graphics.html" class="item__link">Graphics</a></li>
             <li class="list__item"><a href="" class="item__link">Settings</a></li>
             <li class="list__item"><a href="" class="item__link">Log out</a></li>
         </ul>
     </nav>
 </header>
 <body>
-    <div class="container" style="display: flex; justify-content: end;">
+    <div class="container" style="display: flex; justify-content: start;">
         <div id="chart" class="chart" style="height: 60vh; width: 60vw;">
         </div>       
     </div>
@@ -36,21 +36,3 @@
     <script src="{% static 'js/main.js' %}"></script>
 </body>
 </html>
-
-<!-- preguntar a chatgpt:
- Al darle click al botón graphics me aparece esto:
-Page not found (404)
-Request Method:	GET
-Request URL:	http://localhost:8000/home/graphics.html
-Using the URLconf defined in GreenLife.urls, Django tried these URL patterns, in this order:
-
-admin/
-graphics/ [name='graphics']
-[name='index']
-home/ admin/
-home/ [name='index']
-home/ get_chart/ [name='get_chart']
-home/ graphics/ [name='graphics']
-The current path, home/graphics.html, didn’t match any of these.
-
-You’re seeing this error because you have DEBUG = True in your Django settings file. Change that to False, and Django will display a standard 404 page. -->
