@@ -43,3 +43,14 @@ body{
 #p1{
     margin: 0;
 }
+
+.chart{
+    width: 100%;
+    height: 400px;
+}
+
+#chart {
+    width: 100%;
+    height: 400px; /* Explicitly set a height */
+    background-color: red; /* For visibility during testing */
+}
