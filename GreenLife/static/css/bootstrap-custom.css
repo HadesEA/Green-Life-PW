@@ -11,15 +11,6 @@ body{
     background-color: #4a1;
 }
 
-.nav__list{
-    display: flex;
-    align-items: center;
-    list-style-type: none;
-    overflow: hidden;
-    margin: 0;
-    gap: 70px;
-}
-
 .nav__list1{
     display: flex;
     align-items: center;
@@ -33,6 +24,19 @@ body{
     height: 80px;
 }
 
+.nav__list{
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    overflow: hidden;
+    margin: 0;
+    gap: 70px;
+}
+
+#p1{
+    margin: 0;
+}
+
 .item__link{
     font-size: 20px;
     color: black;
@@ -40,6 +44,63 @@ body{
     font-style: normal;
 }
 
-#p1{
+
+.chart{
+    height: 60vh;
+    width: 60vw;
+}
+
+.sidebar{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-direction: column;
+    flex-wrap: wrap;
+    position: fixed;
+    list-style-type: none;
+    background-color: #000;
+    height: 90%;
+    width: 220px;
+    padding: 0;
     margin: 0;
+}
+
+.sidebar__item{
+    height: 30px;
+    width: fit-content;
+    border-bottom: 1px solid #ccc;
+    border-radius: 5px;
+    align-items: end;
+}
+
+.sidebar__item:first-child, .sidebar__item:is(:nth-child(3), :nth-child(5), :nth-child(6), :nth-child(7), :nth-child(8)){
+    align-self: self-start;
+}
+
+.item__sidebar:hover{
+    background-color: #ccc9;
+    color: black;
+    transition: background-color, .7s;
+}
+
+.item__sidebar{
+    height: max-content;
+    border-radius: 10px;
+    padding: 5px 15px;
+    color: #4a1;
+    text-decoration: none;
+}
+
+.suelo{
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.agua{
+    height: 120px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
 }
