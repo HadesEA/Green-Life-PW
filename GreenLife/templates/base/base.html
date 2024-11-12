@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="icon" type="image/x-icon" href="https://greenlifem.com/imgs/logoOficial.png">
     <link rel="stylesheet" href="{% static 'css/bootstrap-custom.css' %}">
     <title>{% block title %}Green Life{% endblock title %}</title>
 </head>
@@ -20,7 +21,6 @@
             <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-primary">Home</a></li>
             <li class="list__item"><a href="{% url 'home:graphics' %}" class="item__link btn btn-outline-secondary">Graphics</a></li>
             <li class="list__item"><a href="" class="item__link btn btn-outline-secondary">Settings</a></li>
-            <li class="list__item"><a href="" class="item__link btn btn-outline-secondary">Log out</a></li>
         </ul>
     </nav>
 </header>

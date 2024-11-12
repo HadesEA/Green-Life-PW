@@ -4,6 +4,13 @@ body{
     background-color: #ccc;
 }
 
+.container{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+}
+
 .header__nav{
     display: flex;
     justify-content: space-between;
@@ -14,7 +21,6 @@ body{
 .nav__list1{
     display: flex;
     align-items: center;
-    overflow: hidden;
     margin: 0;
     font-size: 36px;
     gap: 20px;
@@ -48,6 +54,8 @@ body{
 .chart{
     height: 60vh;
     width: 60vw;
+    padding: 0;
+    margin: 0;
 }
 
 .sidebar{
@@ -79,7 +87,7 @@ body{
 
 .item__sidebar:hover{
     background-color: #ccc9;
-    color: black;
+    color: #4a1;
     transition: background-color, .7s;
 }
 
@@ -87,20 +95,25 @@ body{
     height: max-content;
     border-radius: 10px;
     padding: 5px 15px;
-    color: #4a1;
+    color: #fff;
     text-decoration: none;
 }
 
-.suelo{
+.suelo, .agua{
     height: 240px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
 
-.agua{
-    height: 120px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
+.monitoreo{
+    color: #4a1;
+}
+.monitoreo:hover{
+    color: #000;
+}
+
+.nav__sidebar{
+    height: 90vh;
+    max-width: 220px;
 }

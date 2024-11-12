@@ -40,12 +40,12 @@ const initChart=async () => {
       title: [
         {
           left: 'center',
-          text: 'Gradient along the y axis'
+          text: 'Tabla de muestreo de dato 1'
         },
         {
           top: '55%',
           left: 'center',
-          text: 'Gradient along the x axis'
+          text: 'Tabla de muestreo de dato 2'
         }
       ],
       tooltip: {
