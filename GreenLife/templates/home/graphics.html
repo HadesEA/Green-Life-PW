@@ -50,8 +50,13 @@
                 </ul>
             </nav>
         </section>
-        <div class="contain" style="display: flex; justify-content: end;">
-            <div id="chart" class="chart">
+        <div class="tabla" style="display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div id="intensidadluminica" class="chart">
+            </div>
+            <div id="humedadsuelo" class="chart">
+            </div>
+            <div id="concentraciongases" class="chart">
+
             </div>
         </div>
     </div>
@@ -59,7 +64,8 @@
      <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 
     <!-- custom JS -->
-    <script src="{% static 'js/main.js' %}"></script>
+    <script src="{% static 'js/humedadsuelo.js' %}"></script>
+    <!-- <script src="{% static 'js/intensidadluminica.js' %}"></script> -->
 {% endblock content %}
 </body>
 </html>
