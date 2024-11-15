@@ -1,7 +1,7 @@
 body{
     margin: 0;
     font-family: sans-serif;
-    background-color: #ccc;
+    background: linear-gradient(transparent, #4a18);
 }
 
 
@@ -113,6 +113,13 @@ body{
     flex-direction: column;
     justify-content: space-around;
 }
+
+.suelo > .sidebar__item > .item__sidebar:hover,
+.agua > .sidebar__item > .item__sidebar:hover {
+    background-color: transparent; /* Color de fondo al hacer hover */
+    color: #fff; /* Color de texto al hacer hover */
+}
+
 
 .monitoreo{
     color: #4a1;
@@ -279,4 +286,74 @@ h2{
 
 #nivelagua{
     width: 200px;
+    height: 250px;
 }
+
+/* ESTILOS PARA CLIENTE.HTML INICIO */
+.containerform {
+    margin: 0;
+    font-family: sans-serif;
+    color: #ddd;
+    display: flex;
+}
+
+form {
+    background: #222;
+    padding: 20px 0;
+    width: 500px;
+    margin: auto;
+    box-shadow: 0px 0px 55px #fff2;
+    margin-top: 40px;
+    border-radius: 8px;
+    font-size: 16px;
+}
+
+h1{
+    text-align: center;
+    margin: 0;margin-bottom: 10px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    font-weight: 100;
+    font-size: 1.4em;
+    padding: 10px;
+}
+
+
+.form_input{
+    padding: 6px 20px;
+}
+
+input, textarea, select{
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px 8px;
+    border: none;
+    border: 1px solid #666;
+    box-shadow: 0px 0px 15px #0003;
+    background-color: transparent;
+    border-radius: 4px;
+    color: #ddd;
+} 
+
+textarea {
+    min-width: 100%;
+    resize: none;
+    min-height: 102px;
+    font-family: sans-serif;
+}
+
+label{
+    font-size: 0.9em;
+    line-height: 2;
+}
+
+#terminos{
+    width: auto;
+    height: 10px;
+}
+
+option{
+    background: #222;
+    
+}
+/* ESTILOS PARA CLIENTE.HTML FINAL */

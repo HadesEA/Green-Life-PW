@@ -9,4 +9,5 @@ urlpatterns=[
     path('get_chart/', views.get_chart, name='get_chart'),
     path('graphics/', views.graphics, name='graphics'),
     path('graphicsagua/', views.graphicsagua, name='graphicsagua'),
+    path('cliente/', views.cliente, name='cliente'),
 ]

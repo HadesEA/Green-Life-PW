@@ -22,22 +22,22 @@
                         <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
                     </div>
-                    <li class="sidebar__item"><p href="" class="item__sidebar monitoreo">Cliente</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar monitoreo">Predicción</p></li>
+                    <li class="sidebar__item"><a href="{% url 'home:cliente' %}" class="item__sidebar monitoreo">Cliente</a></li>
+                    <li class="sidebar__item"><a href="" class="item__sidebar monitoreo">Predicción</a></li>
                 </ul>
             </nav>
         </section>
         <div class="tabla">
             <div class="intensidadluminica">
-                <h2><i class="fa fa-lightbulb" aria-hidden="true"></i> Intensidad luminica</h2>
+                <h2><i class="fa fa-lightbulb" style="color: #cd0;" aria-hidden="true"></i> Intensidad luminica</h2>
                 <div id="intensidadluminica" class="chart"></div>
             </div>
             <div class="humedadsuelo">
-                <h2><i class="fa fa-tint" aria-hidden="true"></i> Humedad</h2>
+                <h2><i class="fa fa-tint" style="color: #56f;" aria-hidden="true"></i> Humedad</h2>
                 <div id="humedadsuelo" class="chart"></div>
             </div>
             <div class="cultivos">
-                <h2><i class="fa fa-leaf" aria-hidden="true"></i> Cultivos</h2>
+                <h2><i class="fa fa-leaf" style="color: #3f3;" aria-hidden="true"></i> Cultivos</h2>
                 <div class="cultivos__select">
                     <label> Seleccione su cultivo:
                         <select name="crop-type" id="select__cultivos">
@@ -112,15 +112,15 @@
                 </div>
             </div>
             <div class="concentraciongases">
-                <h2><i class="fa fa-cloud" aria-hidden="true"></i> Concentración de gases</h2>
+                <h2><i class="fa fa-cloud" style="color: #999;" aria-hidden="true"></i> Concentración de gases</h2>
                 <div id="concentraciongases" class="chart"></div>
             </div>
             <div class="temperatura">
-                <h2><i class='fa fa-thermometer-half' aria-hidden='true'></i> Temperatura</h2>
+                <h2><i class='fa fa-thermometer-half' style="color: #f33;" aria-hidden='true'></i> Temperatura</h2>
                 <div id="temperatura" class="chart"></div>
             </div>
             <div class="nivelph">
-                <h2><i class='fa fa-plus' aria-hidden='true'></i> Nivel de pH</h2>
+                <h2><i class='fa fa-plus' style="color: #56f;" aria-hidden='true'></i> Nivel de pH</h2>
                 <div id="nivelph" class="chart">
                     <h3 id="ph">0-14</h3>
                     <p id="ph_text">Muy alcalino</p>

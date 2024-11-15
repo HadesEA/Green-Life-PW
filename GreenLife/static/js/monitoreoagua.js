@@ -1,4 +1,3 @@
-
 const getOptionChart = async () => {
     try {
         const response=await fetch("http://localhost:8000/home/get_chart/");
