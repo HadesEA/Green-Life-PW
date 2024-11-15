@@ -8,4 +8,5 @@ urlpatterns=[
     path('', views.index.as_view(), name="index"),
     path('get_chart/', views.get_chart, name='get_chart'),
     path('graphics/', views.graphics, name='graphics'),
+    path('graphicsagua/', views.graphicsagua, name='graphicsagua'),
 ]

@@ -4,12 +4,6 @@ body{
     background-color: #ccc;
 }
 
-.container{
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-}
 
 .header__nav{
     display: flex;
@@ -51,10 +45,16 @@ body{
 }
 
 
-.chart{
-    height: 30vh;
-    width: 20vw;
+.container{
+    display: flex;
+    margin: 0;
     padding: 0;
+    min-width: 100%;
+}
+
+.nav__sidebar{
+    height: 90vh;
+    width: 12vw;
 }
 
 .sidebar{
@@ -64,6 +64,7 @@ body{
     flex-direction: column;
     flex-wrap: wrap;
     position: fixed;
+    position: static;
     list-style-type: none;
     background-color: #222;
     border: 1px solid #ccc2;
@@ -72,9 +73,12 @@ body{
     width: 220px;
     padding: 15px;
     margin: 10px;
+    z-index: 1;
 }
 
-
+.active{
+    background-color: #fff;
+}
 
 .sidebar__item{
     height: 30px;
@@ -117,12 +121,162 @@ body{
     color: #000;
 }
 
-.nav__sidebar{
-    height: 90vh;
-    display: flex;
-}
-
+/* Monitoreo suelo */
 .tabla{
     display: flex;
-    margin-left: 350px;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: start;
+    gap: 10px;
+}
+
+.chart{
+    width: 30vh;
+    height: 30vh;
+    margin: 20px;
+    padding: 0;
+    justify-content: end;
+}
+
+.intensidadluminica{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.humedadsuelo{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.concentraciongases{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.temperatura{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.nivelph{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+    align-self: center;
+}
+
+.cultivos{
+    border: 2px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+    align-self: center;
+}
+
+#intensidadluminica{
+    width: 300px;
+}
+
+#humedadsuelo{
+    width: 700px;
+}
+
+#concentraciongases{
+    width: 700px;
+}
+
+#temperatura{
+    width: 400px;
+}
+
+#nivelph{
+    width: 200px;
+    height: 170px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+}
+
+#cultivos{
+    width: 200px;
+}
+
+.cultivos__select{
+    width: 200px;
+    height: 150px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+label{
+    width: 170px;
+}
+
+h2{
+    text-align: center;
+    border-bottom: 1px solid #4a1;
+    background-color: #4a12;
+    border-radius: 10px;
+}
+
+/* Monitoreo Agua */
+.nivelpha{
+    border: 1px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.temperatura{
+    border: 1px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.conductividad{
+    border: 1px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.lluvia{
+    margin-top: 20px;
+    border: 1px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+.nivelagua{
+    border: 1px solid #4a13;
+    background-color: #fff;
+    border-radius: 5px;
+}
+
+#temperaturaa{
+    width: 1200px;
+}
+
+#lluvia{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 200px;
+    height: 100px;
+}
+
+#nivelpha{
+    width: 400px;
+}
+
+#conductividad{
+    width: 700px;
+}
+
+#nivelagua{
+    width: 200px;
 }

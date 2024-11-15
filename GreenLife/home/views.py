@@ -29,6 +29,9 @@ class index(generic.View):
 def graphics(request):
     return render(request, 'home/graphics.html')
 
+def graphicsagua(request):
+    return render(request, 'home/graphicsagua.html')
+
 def get_chart(_request):
     serie=[]
     counter=0
