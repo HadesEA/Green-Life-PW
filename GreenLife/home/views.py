@@ -35,6 +35,9 @@ def graphicsagua(request):
 def cliente(request):
     return render(request, 'home/cliente.html')
 
+def prediccion(request):
+    return render(request), 'home/prediccion.html'
+
 def get_chart(_request):
     serie=[]
     counter=0

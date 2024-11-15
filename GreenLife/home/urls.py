@@ -10,4 +10,5 @@ urlpatterns=[
     path('graphics/', views.graphics, name='graphics'),
     path('graphicsagua/', views.graphicsagua, name='graphicsagua'),
     path('cliente/', views.cliente, name='cliente'),
+    path('prediccion/', views.prediccion, name='prediccion'),
 ]
