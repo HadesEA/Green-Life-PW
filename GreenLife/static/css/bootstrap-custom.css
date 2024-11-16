@@ -214,6 +214,10 @@ body{
     width: 200px;
 }
 
+#select__cultivos{
+    color: black;
+}
+
 .cultivos__select{
     width: 200px;
     height: 150px;
