@@ -28,40 +28,28 @@ Green Life - Cliente
             </ul>
         </nav>
     </section>
-    <form action="">
+    <form method="post" action="registro_cliente">
+        {% csrf_token %}
+        {{ form.as_p }}
         <h1>Registro Cliente</h1>
         <!-- SIMPLE INPUTS -->
         <div class="form_input">
-            <label for="nombre">Nombre Completo</label>
-            <input type="text" placeholder="John Doe" id="nombre">
+            <label for="nombre">Nombre</label>
+            <input type="text" placeholder="John" id="nombre">
+        </div>
+        <div class="form_input">
+            <label for="apellido">Apellido</label>
+            <input type="text" placeholder="Doe" id="apellido">
         </div>
         <div class="form_input">
             <label for="email">Correo electrónico</label>
             <input id="email" type="email" placeholder="Ejemplo@gmail.com">
         </div>
-
-        <!-- SELECT Y OPTION -->
         <div class="form_input">
-            <label> Tipo de usuario
-                <select name="type-of-user" id="">
-                    <option value="user1">Dueño</option>
-                    <option value="user2">Trabajador</option>
-                    <option value="user3">Otros</option>
-                </select>
-            </label>
+            <label for="telefono">Número de Telefono</label>
+            <input id="email" type="tel" placeholder="1234567890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
         </div>
-        
-        <!-- TEXT AREA -->
-        <div class="form_input">
-            <label>Mensaje
-                <textarea placeholder="Deja tu mensaje aquí"  cols="30" rows="5"></textarea>
-            </label>
-        </div>
-        <div class="form_input">
-            <label>Acepto los términos y condiciones
-                <input type="checkbox" name="terminos" id="terminos">
-            </label>
-        </div>
+        <button type="submit" class="btn btn-primary m-md-4">Registrar</button>
     </form>
 </div>
 {% endblock content %}

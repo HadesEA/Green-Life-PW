@@ -1,6 +1,7 @@
 body{
     margin: 0;
     font-family: sans-serif;
+    height: 100%;
     background: linear-gradient(transparent, #4a18);
 }
 
@@ -50,6 +51,7 @@ body{
     margin: 0;
     padding: 0;
     min-width: 100%;
+    min-height: 100%;
 }
 
 .nav__sidebar{
@@ -357,3 +359,82 @@ option{
     
 }
 /* ESTILOS PARA CLIENTE.HTML FINAL */
+
+
+/* ESTILOS PARA INDEX.HTML INICIO */
+
+.containerindex{
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+}
+
+.intro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-top: 20px;
+    font-family: 'Arial', sans-serif;
+}
+.intro h1 {
+    color: #006400;
+    font-size: 46px;
+}
+.intro p {
+    color: #228B22;
+    font-size: 18px;
+}
+
+.feature {
+    text-align: center;
+    margin-top: 30px;
+}
+.feature img {
+    width: 30%;
+    border-radius: 10px;
+}
+.feature p {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #000;
+}
+
+
+.cards {
+    display: flex;
+    justify-content: center;
+    gap: 200px;
+    margin-top: 30px;
+}
+.card {
+    background-color: #f0f8ff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: fit-content;
+}
+.card h3 {
+    color: #006400;
+    margin-bottom: 10px;
+}
+.card p {
+    color: #228B22;
+}
+
+/* ESTILOS PARA INDEX.HTML FINAL */
+
+/* ESTILOS PARA BASE.HTML INICIO */
+.footer {
+    background: linear-gradient(transparent, #006400);
+    color: black;
+    text-align: center;
+    padding: 8px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+/* ESTILOS PARA BASE.HTML FINAL */

@@ -4,6 +4,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.models import User
 from django.http.response import JsonResponse
 from random import randrange
+from .forms import RegistroClienteForm
 
 
 # Create your views here.
@@ -37,6 +38,22 @@ def cliente(request):
 
 def prediccion(request):
     return render(request), 'home/prediccion.html'
+
+
+def registro_cliente(request):
+    if request.method == 'POST':
+        form = RegistroClienteForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home/index.html')  # Redirige a una vista de éxito
+    else:
+        form = RegistroClienteForm()
+    
+    return render(request, 'home/cliente.html', {'form': form})
+    
+    
+    
+    
 
 def get_chart(_request):
     serie=[]
