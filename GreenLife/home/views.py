@@ -37,15 +37,15 @@ def cliente(request):
     return render(request, 'home/cliente.html')
 
 def prediccion(request):
-    return render(request), 'home/prediccion.html'
+    return render(request, 'home/prediccion.html')
 
 
-def registro_cliente(request):
+def cliente(request):
     if request.method == 'POST':
         form = RegistroClienteForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('home/index.html')  # Redirige a una vista de éxito
+            return redirect('home:graphics')  # Redirige a una vista de éxito
     else:
         form = RegistroClienteForm()
     

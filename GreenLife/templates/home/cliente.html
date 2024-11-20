@@ -4,52 +4,13 @@ Green Life - Cliente
 {% endblock title %}
 {% block content %}
 <div class="containerform">
-    <section class="nav__sidebar">
-        <nav class="nav__sidebar">
-            <ul class="sidebar">
-                <li class="sidebar__item"><a href="{% url 'home:graphics' %}" class="item__sidebar monitoreo">Monitoreo de suelo</a></li>
-                <div class="suelo">
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Humedad</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Gases</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Intensidad luminica</p></li>
-                </div>
-                <li class="sidebar__item"><a href="{% url 'home:graphicsagua' %}" class="item__sidebar monitoreo">Monitoreo de agua</a></li>
-                <div class="agua">
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Conductividad</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
-                    <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
-                </div>
-                <li class="sidebar__item"><a href="{% url 'home:cliente' %}" class="item__sidebar monitoreo active">Cliente</a></li>
-                <li class="sidebar__item"><a href="" class="item__sidebar monitoreo">Predicción</a></li>
-            </ul>
-        </nav>
-    </section>
-    <form method="post" action="registro_cliente">
+    <form method="post" action="{% url 'home:cliente' %}">
         {% csrf_token %}
-        {{ form.as_p }}
         <h1>Registro Cliente</h1>
-        <!-- SIMPLE INPUTS -->
-        <div class="form_input">
-            <label for="nombre">Nombre</label>
-            <input type="text" placeholder="John" id="nombre">
-        </div>
-        <div class="form_input">
-            <label for="apellido">Apellido</label>
-            <input type="text" placeholder="Doe" id="apellido">
-        </div>
-        <div class="form_input">
-            <label for="email">Correo electrónico</label>
-            <input id="email" type="email" placeholder="Ejemplo@gmail.com">
-        </div>
-        <div class="form_input">
-            <label for="telefono">Número de Telefono</label>
-            <input id="email" type="tel" placeholder="1234567890" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
-        </div>
-        <button type="submit" class="btn btn-primary m-md-4">Registrar</button>
+        <div class="form_cliente">
+            {{ form.as_p }}
+        </div>        
+        <button type="submit" class="btn btn-primary registrocliente">Registrar</button>
     </form>
 </div>
 {% endblock content %}
