@@ -150,38 +150,38 @@ body{
 
 .intensidadluminica{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .humedadsuelo{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .concentraciongases{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .temperatura{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .nivelph{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
     align-self: center;
 }
 
 .cultivos{
     border: 2px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
     align-self: center;
 }
@@ -241,32 +241,32 @@ h2{
 /* Monitoreo Agua */
 .nivelpha{
     border: 1px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .temperatura{
     border: 1px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .conductividad{
     border: 1px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .lluvia{
     margin-top: 20px;
     border: 1px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
 .nivelagua{
     border: 1px solid #4a13;
-    background-color: #fff;
+    background-color: #eee;
     border-radius: 5px;
 }
 
