@@ -2,7 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    height: 100%;
+    /* width: 100%; */
     background: linear-gradient(transparent, #4a18);
 }
 
@@ -299,16 +299,18 @@ h2{
 /* ESTILOS PARA CLIENTE.HTML INICIO */
 .containerform {
     margin: 0;
-    height: 90vh;
+    margin-bottom: 90px;
+    min-height: 90vh;
     font-family: sans-serif;
     color: #ddd;
     display: flex;
+    flex: 1;
 }
 
 form {
     background: linear-gradient(to right, #555 5%, #333 15%, #222 20%);
     padding: 20px 0;
-    width: 20%;
+    min-width: 350px;
     margin: auto;
     box-shadow: 0px 0px 55px #fff2;
     margin-top: 40px;
@@ -325,12 +327,12 @@ h1{
     text-transform: uppercase;
     font-weight: 100;
     font-size: 1.4em;
-    padding: 10px;
+    padding: 10px
 }
 
 
 .form_input{
-    width: 100%;
+    width: 80%;
 }
 
 .form_cliente{
@@ -339,6 +341,7 @@ h1{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    text-align: start;
 }
 
 .registrocliente{
@@ -347,39 +350,11 @@ h1{
     margin: 15px 0;
 }
 
-input, textarea, select{
-    width: 100%;
-    box-sizing: border-box;
-    padding: 6px 8px;
-    border: none;
-    border: 1px solid #666;
-    box-shadow: 0px 0px 15px #0003;
-    background-color: transparent;
-    border-radius: 4px;
-    color: #ddd;
-} 
-
-textarea {
-    min-width: 100%;
-    resize: none;
-    min-height: 102px;
-    font-family: sans-serif;
+.campo{
+    max-width: 80%;
+    min-width: 20%;
 }
 
-label{
-    font-size: 0.9em;
-    line-height: 2;
-}
-
-#terminos{
-    width: auto;
-    height: 10px;
-}
-
-option{
-    background: #222;
-    
-}
 /* ESTILOS PARA CLIENTE.HTML FINAL */
 
 

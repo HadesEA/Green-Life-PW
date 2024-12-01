@@ -1,16 +1,61 @@
 {% extends "base/base.html" %}
 {% block title %}
-Green Life - Cliente
+Green Life - Registro
 {% endblock title %}
 {% block content %}
 <div class="containerform">
-    <form method="post" action="{% url 'home:cliente' %}">
-        {% csrf_token %}
-        <h1>Registro Cliente</h1>
-        <div class="form_cliente">
-            {{ form.as_p }}
-        </div>        
-        <button type="submit" class="btn btn-primary registrocliente">Registrar</button>
-    </form>
+   <form method="post">
+    {% csrf_token %}
+    <div class="form_cliente">
+        <h1>Datos del Cliente</h1>
+        {{ form.cliente_nombre.label_tag }} {{ form.cliente_nombre }}
+        {{ form.cliente_apellido.label_tag }} {{ form.cliente_apellido }}
+        {{ form.cliente_email.label_tag }} {{ form.cliente_email }}
+        {{ form.cliente_telefono.label_tag }} {{ form.cliente_telefono }}
+
+        <h1>Datos de la Finca</h1>
+        {{ form.finca_nombre.label_tag }} {{ form.finca_nombre }}
+        {{ form.finca_ubicacion.label_tag }} {{ form.finca_ubicacion }}
+
+        <h1>Datos del Cultivo</h1>
+        <label for="id_opciones">Selecciona un cultivo:</label>
+        {{ form.opciones }}  <!-- Este es el campo de selección -->
+    
+        <label for="id_nombre">Nombre del Cultivo:</label>
+        {{ form.nombre }}  <!-- Este es el campo para el nombre del cultivo -->
+    
+        <label for="id_tipo_planta">Tipo de Planta:</label>
+        {{ form.tipo_planta }}  <!-- Este es el campo para el tipo de planta -->
+    
+        <label for="id_tiempo_crecimiento">Tiempo de Crecimiento:</label>
+        {{ form.tiempo_crecimiento }}  <!-- Este es el campo para el tiempo de crecimiento -->   
+    </div>
+    <button type="submit" class="btn btn-primary registrocliente">Registrar</button>
+
+</form>
 </div>
+<script>
+    document.getElementById('id_opciones').addEventListener('change', function() {
+        var cultivo_id = this.value;
+        if (cultivo_id) {
+            fetch('/obtener_datos_relacionados/?cultivo_id=' + cultivo_id)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.nombre) {
+                        // Actualizar cada campo con los datos recibidos
+                        document.getElementById('id_nombre').value = data.nombre;
+                        document.getElementById('id_tipo_planta').value = data.tipo_planta;
+                        document.getElementById('id_tiempo_crecimiento').value = data.tiempo_crecimiento;
+                    } else {
+                        // Si no se encontraron datos, limpiar los campos
+                        document.getElementById('id_nombre').value = "No se encontraron datos.";
+                        document.getElementById('id_tipo_planta').value = "";
+                        document.getElementById('id_tiempo_crecimiento').value = "";
+                    }
+                });
+        }
+    });
+</script>
+
+
 {% endblock content %}
