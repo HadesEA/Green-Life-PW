@@ -56,7 +56,7 @@ def registro_combinado(request):
     if request.method == 'POST':
         form = RegistroCombinadoForm(request.POST)
         if form.is_valid():
-            form.guardar()  # Esto debe guardar el formulario si es necesario
+            form.save()  # Esto debe guardar el formulario si es necesario
             return redirect('home:graphics')
 
     return render(request, 'home/cliente.html', {'form': form})
@@ -66,12 +66,12 @@ def registro_combinado(request):
 def obtener_datos_relacionados(request):
     if request.method == 'GET':
         cultivo_id = request.GET.get('cultivo_id')
+        print(f"cultivo_id recibido: {cultivo_id}")  # Depuración
         if cultivo_id:
             cultivo = Cultivo.objects.filter(id=cultivo_id).first()
+            print(f"Cultivo encontrado: {cultivo}")  # Depuración
             if cultivo:
-                # Devolver cada dato por separado
                 datos = {
-                    'nombre': cultivo.nombre,
                     'tipo_planta': cultivo.tipo_planta,
                     'tiempo_crecimiento': cultivo.tiempo_crecimiento,
                 }

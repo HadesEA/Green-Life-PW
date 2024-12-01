@@ -7,28 +7,31 @@ Green Life - Registro
    <form method="post">
     {% csrf_token %}
     <div class="form_cliente">
+       <div class="section__cliente">
         <h1>Datos del Cliente</h1>
         {{ form.cliente_nombre.label_tag }} {{ form.cliente_nombre }}
         {{ form.cliente_apellido.label_tag }} {{ form.cliente_apellido }}
         {{ form.cliente_email.label_tag }} {{ form.cliente_email }}
         {{ form.cliente_telefono.label_tag }} {{ form.cliente_telefono }}
+       </div>
 
-        <h1>Datos de la Finca</h1>
-        {{ form.finca_nombre.label_tag }} {{ form.finca_nombre }}
-        {{ form.finca_ubicacion.label_tag }} {{ form.finca_ubicacion }}
+        <div class="section__finca">
+            <h1>Datos de la Finca</h1>
+            {{ form.finca_nombre.label_tag }} {{ form.finca_nombre }}
+            {{ form.finca_ubicacion.label_tag }} {{ form.finca_ubicacion }}
+        </div>
 
-        <h1>Datos del Cultivo</h1>
+        <div class="section__cultivo">
+            <h1>Datos del Cultivo</h1>
         <label for="id_opciones">Selecciona un cultivo:</label>
         {{ form.opciones }}  <!-- Este es el campo de selección -->
-    
-        <label for="id_nombre">Nombre del Cultivo:</label>
-        {{ form.nombre }}  <!-- Este es el campo para el nombre del cultivo -->
     
         <label for="id_tipo_planta">Tipo de Planta:</label>
         {{ form.tipo_planta }}  <!-- Este es el campo para el tipo de planta -->
     
-        <label for="id_tiempo_crecimiento">Tiempo de Crecimiento:</label>
-        {{ form.tiempo_crecimiento }}  <!-- Este es el campo para el tiempo de crecimiento -->   
+        <label for="id_tiempo_crecimiento">Tiempo de Crecimiento (dias):</label>
+        {{ form.tiempo_crecimiento }}  <!-- Este es el campo para el tiempo de crecimiento -->
+        </div>   
     </div>
     <button type="submit" class="btn btn-primary registrocliente">Registrar</button>
 
@@ -38,17 +41,15 @@ Green Life - Registro
     document.getElementById('id_opciones').addEventListener('change', function() {
         var cultivo_id = this.value;
         if (cultivo_id) {
-            fetch('/obtener_datos_relacionados/?cultivo_id=' + cultivo_id)
+            fetch('/home/obtener_datos/?cultivo_id=' + cultivo_id)
                 .then(response => response.json())
                 .then(data => {
-                    if (data.nombre) {
+                    if (data.tipo_planta) {
                         // Actualizar cada campo con los datos recibidos
-                        document.getElementById('id_nombre').value = data.nombre;
                         document.getElementById('id_tipo_planta').value = data.tipo_planta;
                         document.getElementById('id_tiempo_crecimiento').value = data.tiempo_crecimiento;
                     } else {
                         // Si no se encontraron datos, limpiar los campos
-                        document.getElementById('id_nombre').value = "No se encontraron datos.";
                         document.getElementById('id_tipo_planta').value = "";
                         document.getElementById('id_tiempo_crecimiento').value = "";
                     }
