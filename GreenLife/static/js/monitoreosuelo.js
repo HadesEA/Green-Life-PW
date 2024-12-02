@@ -29,8 +29,8 @@ const chartData = {
       title: 'Temperatura del Suelo y Ambiente',
       xAxisData: ['1', '2', '3', '4', '5', '6', '7', '8', '9'],
       seriesData: [
-          { name: 'Suelo', data: [5, 10, 15, 20, 25, 30, 35, 40, 45] },
-          { name: 'Ambiente', data: [6, 11, 16, 21, 26, 31, 36, 21, 6] }
+          { name: 'Suelo', data: [16, 17, 15, 16, 16, 15, 16, 17, 16] },
+          { name: 'Ambiente', data: [20, 19, 18, 20, 21, 21, 20, 21, 20] }
       ]
   }
 };

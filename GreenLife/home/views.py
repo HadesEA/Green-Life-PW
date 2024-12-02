@@ -46,18 +46,29 @@ def prediccion(request):
 
 # Vistas de los formularios
 def registro_combinado(request):
+    print("Método: ", request.method)
+    print("Datos POST recibidos: ", request.POST)
     form = RegistroCombinadoForm()
     
     # Poblar el campo select con datos de la base de datos
     opciones = Cultivo.objects.values_list('id', 'nombre')  # Cambia según tu modelo.
-    form.fields['opciones'].choices = [(op[0], op[1]) for op in opciones]
+    opciones_choices = [(op[0], op[1]) for op in opciones]
 
     # Si el formulario se envió (POST)
     if request.method == 'POST':
         form = RegistroCombinadoForm(request.POST)
+        form.fields['opciones'].choices = opciones_choices
         if form.is_valid():
-            form.save()  # Esto debe guardar el formulario si es necesario
+            print("Formulario válido, reditiriengo...")
+            form.guardar()  # Esto debe guardar el formulario si es necesario
             return redirect('home:graphics')
+        else:
+            print("Formulario no válido, errores: ", form.errors)
+    else:
+        form = RegistroCombinadoForm()
+
+    opciones = Cultivo.objects.values_list('id', 'nombre')  # Cambia según tu modelo.
+    form.fields['opciones'].choices = [(op[0], op[1]) for op in opciones]
 
     return render(request, 'home/cliente.html', {'form': form})
 

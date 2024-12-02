@@ -23,7 +23,7 @@ const initChart=async () => {
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: [1, 2, 3, 4, 5, 6, 7],
         type: 'line',
         areaStyle: {}
       }
@@ -57,7 +57,7 @@ const iniChart=async () => {
     },
     series: [
       {
-        data: [820, 932, 901, 934, 1290, 1330, 1320],
+        data: [15, 17, 16, 18, 15, 15, 15],
         type: 'line',
         areaStyle: {}
       }

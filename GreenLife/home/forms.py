@@ -34,6 +34,11 @@ class RegistroCombinadoForm(forms.Form):
         required=True,
         widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese ubicación de la finca'})
     )
+    finca_cliente = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su id'})
+    )
 
      # Nuevo campo para el select
     opciones = forms.ChoiceField(
@@ -64,8 +69,9 @@ class RegistroCombinadoForm(forms.Form):
 
         # Crear instancia del modelo Finca
         finca = Finca(
+            cliente=cliente,
             nombre=self.cleaned_data['finca_nombre'],
-            ubicacion=self.cleaned_data['finca_ubicacion'],
+            ubicacion=self.cleaned_data['finca_ubicacion']
         )
         finca.save()
 

@@ -179,13 +179,6 @@ body{
     align-self: center;
 }
 
-.cultivos{
-    border: 2px solid #4a13;
-    background-color: #eee;
-    border-radius: 5px;
-    align-self: center;
-}
-
 #intensidadluminica{
     width: 300px;
 }
@@ -209,22 +202,6 @@ body{
     justify-content: space-evenly;
     flex-direction: column;
     align-items: center;
-}
-
-#cultivos{
-    width: 200px;
-}
-
-#select__cultivos{
-    color: black;
-}
-
-.cultivos__select{
-    width: 200px;
-    height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 }
 
 label{
@@ -309,7 +286,7 @@ h2{
 }
 
 form {
-    background: linear-gradient(to right, #555 5%, #333 15%, #222 20%);
+    background: linear-gradient(to top, #555, #333 10%, #222 20%, #000 60%);
     padding: 20px 0;
     min-width: 40%;
     margin: auto;
@@ -322,8 +299,8 @@ form {
     flex-direction: column;
 }
 
-h1{
-    text-align: start;
+form h1{
+    text-align: center;
     margin: 0;
     margin-bottom: 10px;
     text-transform: uppercase;
