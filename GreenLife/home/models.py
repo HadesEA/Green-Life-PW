@@ -249,3 +249,76 @@ class AlertasUsuario(models.Model):
 
     def __str__(self):
         return f"Alerta de {self.alerta.tipo_alerta} para {self.usuario.nombre}"
+
+class Counter(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterDistancia(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_distancia = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterHT(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_ht = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterLUX(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_lux = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterLluvia(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_lluvia = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterMQ7(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_mq7 = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterMQ8(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_mq8 = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterPH(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_ph = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterTC(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_tc = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterTDS(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_tds = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterTF(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_tf = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
+class CounterTS(models.Model):
+    nodo = models.CharField(max_length=255, primary_key=True)
+    cnt_ts = models.IntegerField()
+    fecha_creacion = models.DateTimeField(auto_now_add=True)
+    fecha_actualizacion = models.DateTimeField(auto_now_add=True)
+
