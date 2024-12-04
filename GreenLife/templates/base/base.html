@@ -21,7 +21,7 @@
         <ul class="nav__list">
             <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-primary">Inicio</a></li>
             <li class="list__item"><a href="{% url 'home:cliente' %}" class="item__link btn btn-outline-secondary">{% block boton %}Cliente{% endblock boton %}</a></li>
-            <li class="list__item"><a href="" class="item__link btn btn-outline-secondary">Soporte técnico</a></li>
+            <li class="list__item"><a href="{% url 'home:soporte' %}" class="item__link btn btn-outline-secondary">Soporte técnico</a></li>
         </ul>
     </nav>
 </header>

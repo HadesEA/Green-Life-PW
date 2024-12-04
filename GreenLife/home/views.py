@@ -37,6 +37,9 @@ def graphicsagua(request):
 def cliente(request):
     return render(request, 'home/cliente.html')
 
+def soporte(request):
+    return render(request, 'home/soporte.html')
+
 def prediccion(request):
     return render(request, 'home/prediccion.html')
 

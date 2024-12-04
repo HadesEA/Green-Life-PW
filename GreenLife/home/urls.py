@@ -7,6 +7,7 @@ urlpatterns=[
     path('admin/', admin.site.urls),
     path('', views.index.as_view(), name="index"),
     path('graphics/', views.graphics, name='graphics'),
+    path('soporte/', views.soporte, name='soporte'),
     path('graphicsagua/', views.graphicsagua, name='graphicsagua'),
     path('cliente/', views.registro_combinado, name='cliente'),
     path('obtener_datos/', views.obtener_datos_relacionados, name='obtener_datos'),
