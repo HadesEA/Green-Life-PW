@@ -21,7 +21,21 @@ Green Life - Registro
             {{ form.finca_ubicacion.label_tag }} {{ form.finca_ubicacion }}
             {{ form.finca_cliente.label_tag }} {{ form.finca_cliente }}
         </div>
+        
+        <div class="section__parcerla">
+            <h1>Datos de la Parcela</h1>
+            {{ form.parcela_ubicacion.label_tag }} {{ form.parcela_ubicacion }}
+            {{ form.parcela_tamaño.label_tag }} {{ form.parcela_tamaño }}
+            {{ form.parcela_cliente.label_tag }} {{ form.parcela_cliente }}
+        </div>
 
+        <div class="section__estacion">
+            <h1>Datos de la Estación</h1>
+            {{ form.estacion_nombre.label_tag }} {{ form.estacion_nombre }}
+            {{ form.estacion_ubicacion.label_tag }} {{ form.estacion_ubicacion }}
+            {{ form.estacion_tipo.label_tag }} {{ form.estacion_tipo }}
+        </div>
+        
         <div class="section__cultivo">
             <h1>Datos del Cultivo</h1>
         <label for="id_opciones">Selecciona un cultivo:</label>

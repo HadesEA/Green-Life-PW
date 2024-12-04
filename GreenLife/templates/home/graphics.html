@@ -32,32 +32,36 @@
         <div class="tabla">
             <div class="intensidadluminica">
                 <h2><i class="fa fa-lightbulb" style="color: #cd0;" aria-hidden="true"></i> Intensidad luminica</h2>
-                <div id="intensidadluminica" class="chart"></div>
+                <div id="grafico-lux" class="chart"></div>
+                <p id="estado-lux" class="estadosgraficas"></p>
             </div>
             <div class="humedadsuelo">
                 <h2><i class="fa fa-tint" style="color: #56f;" aria-hidden="true"></i> Humedad</h2>
-                <div id="humedadsuelo" class="chart"></div>
+                <div id="grafico-humedad" class="chart"></div>
+                <p id="estado-humedad" class="estadosgraficas"></p>
             </div>
             <div class="concentraciongases">
                 <h2><i class="fa fa-cloud" style="color: #999;" aria-hidden="true"></i> Concentración de gases</h2>
-                <div id="concentraciongases" class="chart"></div>
+                <div id="grafico-gas" class="chart"></div>
+                <p id="estado-gas" class="estadosgraficas"></p>
             </div>
             <div class="temperatura">
                 <h2><i class='fa fa-thermometer-half' style="color: #f33;" aria-hidden='true'></i> Temperatura</h2>
-                <div id="temperatura" class="chart"></div>
+                <div id="grafico-temperatura" class="chart"></div>
+                <p id="estado-temperatura" class="estadosgraficas"></p>
             </div>
             <div class="nivelph">
                 <h2><i class='fa fa-plus' style="color: #56f;" aria-hidden='true'></i> Nivel de pH</h2>
-                <div id="nivelph" class="chart">
-                    <h3 id="ph">0-14</h3>
-                    <p id="ph_text">Muy alcalino</p>
-                </div>
+                <div id="grafico-ph" class="chart"></div>
+                <p id="estado-ph" class="estadosgraficas"></p>
             </div>
         </div>
     </div>
+    
     <!-- Apache Echarts -->
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 
     <!-- custom JS -->
     <script src="{% static 'js/monitoreosuelo.js' %}"></script>
+
 {% endblock content %}

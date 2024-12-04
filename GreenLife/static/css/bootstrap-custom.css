@@ -173,25 +173,23 @@ body{
 }
 
 .nivelph{
+    margin: 0;
+    padding: 0;
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
-    align-self: center;
 }
 
-#intensidadluminica{
-    width: 300px;
-}
 
-#humedadsuelo{
+#grafico-humedad{
     width: 700px;
 }
 
-#concentraciongases{
+#grafico-gas{
     width: 700px;
 }
 
-#temperatura{
+#grafico-temperatura{
     width: 400px;
 }
 
@@ -236,7 +234,6 @@ h2{
 }
 
 .lluvia{
-    margin-top: 20px;
     border: 1px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
@@ -252,13 +249,13 @@ h2{
     width: 1200px;
 }
 
-#lluvia{
+#grafico-agua{
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
-    width: 200px;
-    height: 100px;
+    width: 500px;
+    height: 290px;
 }
 
 #nivelpha{
@@ -272,6 +269,11 @@ h2{
 #nivelagua{
     width: 200px;
     height: 250px;
+}
+
+.estadosgraficas{
+    text-align: center;
+    margin-bottom: 15px;
 }
 
 /* ESTILOS PARA CLIENTE.HTML INICIO */
@@ -321,14 +323,14 @@ form h1{
     align-items: center;
 }
 
-.section__cliente, .section__cultivo, .section__finca{
+.section__cliente, .section__cultivo, .section__finca, .section__parcela, .section__estacion{
     width: fit-content;
     flex: 1;
     margin: 40px;
 }
 
 .registrocliente{
-    width: 100px;
+    width: 20%;
     flex: 1;
     align-self: center;
     margin: 15px 0;
@@ -412,7 +414,8 @@ form h1{
     color: black;
     text-align: center;
     padding: 8px 0;
-    position: fixed;
+    margin-top: 40px;
+    position: static;
     bottom: 0;
     width: 100%;
 }

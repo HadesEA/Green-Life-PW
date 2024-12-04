@@ -1,5 +1,5 @@
 from django import forms
-from .models import Cliente, Finca
+from .models import Cliente, Finca, Parcela, Estacion
 
 class RegistroCombinadoForm(forms.Form):
     # Campos del modelo Cliente
@@ -40,6 +40,47 @@ class RegistroCombinadoForm(forms.Form):
         widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su id'})
     )
 
+    parcela_ubicacion = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese ubicación de la parcela'})
+    )
+    parcela_tamaño = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese tamaño de la parcela (mts)'})
+    )
+    parcela_cliente = forms.CharField(
+        max_length=100,
+        required=True,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su id'})
+    )
+
+    estacion_nombre = forms.CharField(
+        max_length=100,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'readonly': 'readonly', 'placeholder': 'Estación 1'})
+    )
+
+    estacion_ubicacion = forms.CharField(
+        max_length=1,
+        required=False,
+        widget=forms.TextInput(attrs={'class': 'form-control form_input campo','readonly': 'readonly', 'placeholder': 'Ubicación Parcela'})
+    )
+
+    TIPOS_ESTACION = [
+    ('Suelo', 'Medidor de Suelo'),
+    ('Agua', 'Medidor de Agua'),
+    ('Ambiente', 'Medidor de Ambiente'),
+    ('Completo', 'Medidor completo'),
+    ]
+
+    estacion_tipo = forms.ChoiceField(
+        choices=TIPOS_ESTACION,
+        required=True,
+        widget=forms.Select(attrs={'class': 'form-control form_input campo'})
+    )
+
      # Nuevo campo para el select
     opciones = forms.ChoiceField(
         choices=[],  # Se llenará dinámicamente en la vista.
@@ -74,5 +115,19 @@ class RegistroCombinadoForm(forms.Form):
             ubicacion=self.cleaned_data['finca_ubicacion']
         )
         finca.save()
+        
+        parcela = Parcela(
+            cliente=cliente,
+            ubicacion=self.cleaned_data['parcela_ubicacion'],
+            tamaño=self.cleaned_data['parcela_tamaño']
+        )
+        parcela.save()
 
-        return cliente, finca
+        estacion = Estacion(
+            nombre=self.cleaned_data['estacion_nombre'],
+            ubicacion=self.cleaned_data['estacion_ubicacion'],
+            tipo_estacion=self.cleaned_data['estacion_tipo']
+        )
+        estacion.save()
+
+        return cliente, finca, parcela, estacion

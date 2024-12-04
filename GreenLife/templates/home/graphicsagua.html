@@ -32,33 +32,37 @@ Graficas agua
         <div class="tabla">
             <div class="temperatura">
                 <h2><i class='fa fa-thermometer-half' style="color: #f33;" aria-hidden='true'></i> Temperatura</h2>
-                <div id="temperaturaa" class="chart"></div>
+                <div id="grafico-temperatura" class="chart"></div>
+                <p id="estado-temperatura" class="estadosgraficas"></p>
             </div>
             <div class="cultivo-lluvia">
                 <div class="lluvia">
                     <h2><i class='fa fa-cloud' style="color: #999;" aria-hidden='true'></i> Lluvia</h2>
-                    <div id="lluvia">
-                        <h3 id="lluvia-state">Estado:</h3>
-                        <p id="lluvia-text">Sin dato</p>
-                    </div>
+                    <div id="grafico-agua" class="chart"></div>
+                    <p id="estado-agua" class="estadosgraficas"></p>
                 </div>
             </div>
             <div class="nivelpha">
                 <h2><i class='fa fa-plus' style="color: #56f;" aria-hidden='true'></i> Nivel pH agua</h2>
-                <div id="nivelpha" class="chart"></div>
+                <div id="grafico-ph" class="chart"></div>
+                <p id="estado-ph" class="estadosgraficas"></p>
             </div>
             <div class="conductividad">
                 <h2><i class='fa fa-bolt' style="color: #ee0;" aria-hidden='true'></i> Conductividad</h2>
-                <div id="conductividad" class="chart"></div>
+                <div id="grafico-tds" class="chart"></div>
+                <p id="estado-tds" class="estadosgraficas"></p>
             </div>
             <div class="nivelagua">
                 <h2><i class='fa fa-tint' style="color: #54f;" aria-hidden='true'></i> Nivel de Agua</h2>
-                <div id="nivelagua" class="chart"></div>
+                <div id="grafico-distancia" class="chart"></div>
+                <p id="estado-distancia" class="estadosgraficas"></p>
             </div>
         </div>
     <!-- Apache Echarts -->
      <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>
 
     <!-- custom JS -->
-    <script src="{% static 'js/monitoreoagua.js' %}"></script>
+     <script src="{% static 'js/monitoreoagua.js' %}"></script>
+     <script src="{% static 'js/monitoreosuelo.js' %}"></script>
+    </div>
 {% endblock content %}

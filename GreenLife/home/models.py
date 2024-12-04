@@ -252,73 +252,73 @@ class AlertasUsuario(models.Model):
 
 class Counter(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt = models.IntegerField()
+    cnt = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterDistancia(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_distancia = models.IntegerField()
+    cntDistancia = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterHT(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_ht = models.IntegerField()
+    cntHT = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterLUX(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_lux = models.IntegerField()
+    cntLUX = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterLluvia(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_lluvia = models.IntegerField()
+    cntLluvia = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterMQ7(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_mq7 = models.IntegerField()
+    cntMQ7 = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterMQ8(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_mq8 = models.IntegerField()
+    cntMQ8 = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterPH(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_ph = models.IntegerField()
+    cntPH = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterTC(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_tc = models.IntegerField()
+    cntTC = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterTDS(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_tds = models.IntegerField()
+    cntTDS = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterTF(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_tf = models.IntegerField()
+    cntTF = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
 class CounterTS(models.Model):
     nodo = models.CharField(max_length=255, primary_key=True)
-    cnt_ts = models.IntegerField()
+    cntTS = models.FloatField()
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
