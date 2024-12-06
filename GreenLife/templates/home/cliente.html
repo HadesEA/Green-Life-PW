@@ -8,7 +8,7 @@ Green Life - Registro
     {% csrf_token %}
     <div class="form_cliente">
        <div class="section__cliente">
-        <h1>Datos del Cliente</h1>
+        <h1>Registro del Cliente</h1>
         {{ form.cliente_nombre.label_tag }} {{ form.cliente_nombre }}
         {{ form.cliente_apellido.label_tag }} {{ form.cliente_apellido }}
         {{ form.cliente_email.label_tag }} {{ form.cliente_email }}
@@ -16,14 +16,14 @@ Green Life - Registro
        </div>
 
         <div class="section__finca">
-            <h1>Datos de la Finca</h1>
+            <h1>Registro de la Finca</h1>
             {{ form.finca_nombre.label_tag }} {{ form.finca_nombre }}
             {{ form.finca_ubicacion.label_tag }} {{ form.finca_ubicacion }}
             {{ form.finca_cliente.label_tag }} {{ form.finca_cliente }}
         </div>
         
         <div class="section__parcerla">
-            <h1>Datos de la Parcela</h1>
+            <h1>Registro de la Parcela</h1>
             {{ form.parcela_ubicacion.label_tag }} {{ form.parcela_ubicacion }}
             {{ form.parcela_tamaño.label_tag }} {{ form.parcela_tamaño }}
             {{ form.parcela_cliente.label_tag }} {{ form.parcela_cliente }}

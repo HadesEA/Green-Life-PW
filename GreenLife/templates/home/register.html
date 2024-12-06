@@ -1,0 +1,17 @@
+{% extends "base/base.html" %}
+{% block title %}
+Green Life - Sign up
+{% endblock title %}
+{% block content %}
+<h2>Registrarse</h2>
+<div class="form__registro__sesion">
+    <form method="post">
+        {% csrf_token %}
+        <div class="registro__sesion">
+            {{ form.as_p }}
+            <button type="submit" class="registro__switch btn btn-outline-primary">Registrarse</button>
+            <h4><a href="{% url 'home:login' %}" class="registro__switch btn btn-outline-primary">Iniciar Sesión</a></h4>
+        </div>
+    </form>
+</div>
+{% endblock content %}

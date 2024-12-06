@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.timezone import now
 
 # Create your models here.
 
@@ -36,16 +37,20 @@ class Finca(models.Model):
         return f"Finca {self.nombre} ({self.ubicacion})"
 
 class Siembra(models.Model):
-    parcela = models.ForeignKey(Parcela, on_delete=models.CASCADE)
-    cultivo = models.ForeignKey(Cultivo, on_delete=models.CASCADE)
-    fecha_siembra = models.DateField()
+    parcela = models.ForeignKey(Parcela, on_delete=models.CASCADE, null=True)
+    cultivo = models.ForeignKey(Cultivo, on_delete=models.CASCADE, null=True)
+    tiempo_siembra = models.IntegerField(default=0)
+    fecha_siembra = models.DateField(default=now)
 
     def __str__(self):
-        return f"Siembra de {self.cultivo.nombre} en {self.parcela.ubicacion}"
+        parcela_ubicacion = self.parcela.ubicacion if self.parcela else "Sin parcela"
+        cultivo_nombre = self.cultivo.nombre if self.cultivo else "Sin cultivo"
+        return f"Siembra de {cultivo_nombre} en {parcela_ubicacion}"
 
 class Cosecha(models.Model):
-    siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE)
-    fecha_cosecha = models.DateField()
+    siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE, null=True)
+    tiempo_cosecha = models.IntegerField(default=0)
+    fecha_cosecha = models.DateField(default=now)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
@@ -54,6 +59,8 @@ class Cosecha(models.Model):
 class Insumo(models.Model):
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=50)
+    fecha_insumo = models.DateField(default=now)
+    tiempo_insumo = models.IntegerField(default=0)
     unidad_medida = models.CharField(max_length=20)
 
     def __str__(self):
@@ -101,13 +108,15 @@ class Enfermedad(models.Model):
         return self.nombre
 
 class Tratamiento(models.Model):
-    siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE)
+    siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE, null=True)
     tipo = models.CharField(max_length=50)
     fecha_tratamiento = models.DateField()
     descripcion = models.TextField()
 
     def __str__(self):
-        return f"Tratamiento para {self.siembra.cultivo.nombre} - {self.tipo}"
+        if self.siembra and self.siembra.cultivo:
+            return f"Tratamiento para {self.siembra.cultivo.nombre} - {self.tipo}"
+        return "Tratamiento (datos incompletos)"
 
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
@@ -322,3 +331,6 @@ class CounterTS(models.Model):
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     fecha_actualizacion = models.DateTimeField(auto_now_add=True)
 
+class Riego(models.Model):
+    fecha_riego = models.DateField(default=now)
+    tiempo_riego = models.IntegerField(default=0)

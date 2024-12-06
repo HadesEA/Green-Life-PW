@@ -1,0 +1,241 @@
+{% extends "base/base.html" %}
+{% block title %}
+Green Life - Inventario
+{% endblock title %}
+{% block content %}
+<div class="containerinventario">
+    <section class="nav__sidebar">
+        <nav class="nav__sidebar">
+            <ul class="sidebar">
+                <li class="sidebar__item"><a href="{% url 'home:graphics' %}" class="item__sidebar monitoreo">Monitoreo de suelo</a></li>
+                <div class="suelo">
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Humedad</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Gases</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Intensidad luminica</p></li>
+                </div>
+                <li class="sidebar__item"><a href="{% url 'home:graphicsagua' %}" class="item__sidebar monitoreo">Monitoreo de agua</a></li>
+                <div class="agua">
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Conductividad</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
+                </div>
+                <li class="sidebar__item"><a href="{% url 'home:prediccion' %}" class="item__sidebar monitoreo">Predicción</a></li>
+                <li class="sidebar__item"><a href="" class="item__sidebar monitoreo active">Inventario</a></li>
+            </ul>
+        </nav>
+    </section>
+
+
+    <main class="maininventario">
+        <div class="inventario">
+            <div class="equipos">
+                <div class="equipo">
+                    <div class="registro__titulo">
+                        <h3>Registrar Equipo</h3>
+                        <form method="post" class="form__inventario">
+                            {% csrf_token %}
+                            {{ equipo_form.as_p }}
+                            <button type="submit" name="registrar_equipo" class="btn btn-primary">Registrar Equipo</button>
+                        </form>
+                    </div>
+
+                    <div class="mt-4">
+                        <h3>Equipos</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha de Adquisición</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for equipo in equipos %}
+                                <tr>
+                                    <td>{{ equipo.nombre }}</td>
+                                    <td>{{ equipo.tipo }}</td>
+                                    <td>{{ equipo.fecha_adquisicion }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="insumos">
+                    <div class="registro__titulo">
+                        <h3>Registrar Insumo</h3>
+                        <form method="post" class="form__inventario">
+                            {% csrf_token %}
+                            {{ insumo_form.as_p }}
+                            <button type="submit" name="registrar_insumo" class="btn btn-primary">Registrar Insumo</button>
+                        </form>
+                    </div>
+
+                    <!-- Tabla de Insumos -->
+                    <div class="mt-4">
+                        <h3>Insumos</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha de Insumo</th>
+                                    <th>Unidad de Medida</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for insumo in insumos %}
+                                <tr>
+                                    <td>{{ insumo.nombre }}</td>
+                                    <td>{{ insumo.tipo }}</td>
+                                    <td>{{ insumo.fecha_insumo }}</td>
+                                    <td>{{ insumo.unidad_medida }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="proveedor">
+                    <div class="registro__titulo">
+                        <h3>Registrar Proveedor</h3>
+                        <form method="post" class="form__inventario">
+                            {% csrf_token %}
+                            {{ proveedor_form.as_p }}
+                            <button type="submit" name="registrar_proveedor" class="btn btn-primary">Registrar Proveedor</button>
+                        </form>
+                    </div>
+
+                    <!-- Tabla de Proveedores -->
+                    <div class="mt-4">
+                        <h3>Proveedores</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Contacto</th>
+                                    <th>Teléfono</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for proveedor in proveedores %}
+                                <tr>
+                                    <td>{{ proveedor.nombre }}</td>
+                                    <td>{{ proveedor.contacto }}</td>
+                                    <td>{{ proveedor.telefono }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="enfermedades">
+                <div class="plaga">
+                        <div class="registro__titulo">
+                            <h3>Registrar Plaga</h3>
+                            <form method="post" class="form__inventario">
+                                {% csrf_token %}
+                                {{ plaga_form.as_p }}
+                                <button type="submit" name="registrar_plaga" class="btn btn-primary">Registrar Plaga</button>
+                            </form>
+                        </div>
+    
+                                    <!-- Tabla de Plagas -->
+                        <div class="mt-4">
+                            <h3>Plagas</h3>
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>Nombre</th>
+                                        <th>Descripción</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% for plaga in plagas %}
+                                    <tr>
+                                        <td>{{ plaga.nombre }}</td>
+                                        <td>{{ plaga.descripcion }}</td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                </div>
+                <div class="enfermedad">
+                   <div class="registro__titulo">
+                        <h3>Registrar Enfermedad</h3>
+                        <form method="post" class="form__inventario">
+                            {% csrf_token %}
+                            {{ enfermedad_form.as_p }}
+                            <button type="submit" name="registrar_enfermedad" class="btn btn-primary">Registrar Enfermedad</button>
+                        </form>
+                   </div>
+
+                    <!-- Tabla de Enfermedades -->
+                    <div class="mt-4">
+                        <h3>Enfermedades</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for enfermedad in enfermedades %}
+                                <tr>
+                                    <td>{{ enfermedad.nombre }}</td>
+                                    <td>{{ enfermedad.descripcion }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tratamiento">
+                    <div class="registro__titulo">
+                        <h3>Registrar Tratamiento</h3>
+                        <form method="post" class="form__inventario">
+                            {% csrf_token %}
+                            {{ tratamiento_form.as_p }}
+                            <button type="submit" name="registrar_tratamiento" class="btn btn-primary">Registrar Tratamiento</button>
+                        </form>
+                    </div>
+
+                       <!-- Tabla de Tratamientos -->
+                    <div class="mt-4">
+                        <h3>Tratamientos</h3>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Siembra</th>
+                                    <th>Tipo</th>
+                                    <th>Fecha</th>
+                                    <th>Descripción</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for tratamiento in tratamientos %}
+                                <tr>
+                                    <td>{{ tratamiento.siembra }}</td>
+                                    <td>{{ tratamiento.tipo }}</td>
+                                    <td>{{ tratamiento.fecha_tratamiento }}</td>
+                                    <td>{{ tratamiento.descripcion }}</td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+{% endblock content %}

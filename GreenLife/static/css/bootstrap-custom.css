@@ -2,8 +2,8 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
-    /* width: 100%; */
     background: linear-gradient(transparent, #4a18);
+    height: 100%;
 }
 
 
@@ -52,12 +52,13 @@ body{
     margin: 0;
     padding: 0;
     min-width: 100%;
-    min-height: 100%;
+    height: 800px;
 }
 
 .nav__sidebar{
     height: 90vh;
     width: 12vw;
+    z-index: 3;
 }
 
 .sidebar{
@@ -205,6 +206,7 @@ body{
 label{
     width: fit-content;
     margin-left: 14px;
+    color: #fff;
 }
 
 h2{
@@ -213,6 +215,13 @@ h2{
     background-color: #4a12;
     border-radius: 10px;
 }
+
+
+
+.containergraficas{
+    display: flex;
+}
+
 
 /* Monitoreo Agua */
 .nivelpha{
@@ -280,7 +289,7 @@ h2{
 .containerform {
     margin: 0;
     margin-bottom: 90px;
-    min-height: 90vh;
+    height: 75vh;
     font-family: sans-serif;
     color: #ddd;
     display: flex;
@@ -291,6 +300,9 @@ form {
     background: linear-gradient(to top, #555, #333 10%, #222 20%, #000 60%);
     padding: 20px 0;
     min-width: 40%;
+    max-width: fit-content;
+    min-height: 40%;
+    max-height: fit-content;
     margin: auto;
     box-shadow: 0px 0px 55px #fff2;
     margin-top: 40px;
@@ -323,6 +335,30 @@ form h1{
     align-items: center;
 }
 
+.form__registro__sesion{
+    margin: 0;
+    padding: 0;
+}
+
+.registro__sesion{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-align: center;
+}
+
+.registro__item{
+    width: 100%;
+}
+
+.registro__switch{
+    height: 40px;
+    margin-top: 50px;
+}
+
 .section__cliente, .section__cultivo, .section__finca, .section__parcela, .section__estacion{
     width: fit-content;
     flex: 1;
@@ -346,7 +382,7 @@ form h1{
 /* ESTILOS PARA INDEX.HTML INICIO */
 
 .containerindex{
-    height: 100vh;
+    height: 78vh;
     margin: 0;
     padding: 0;
 }
@@ -421,3 +457,97 @@ form h1{
 }
 
 /* ESTILOS PARA BASE.HTML FINAL */
+
+/* ESTILOS PARA PREDICCION.HTML INICIO */
+.containerprediccion{
+    display: flex;
+}
+
+.mainprediccion{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.ingresodatos, .muestradatos{
+    padding: 40px;
+    margin: auto;
+    box-shadow: 0 0 50px 2px #0009;
+}
+
+/* ESTILOS PARA PREDICCION.HTML FINAL */
+
+/* ESTILOS PARA SOPORTE.HTML INICIO */
+.alert-container {
+    position:fixed;
+    height: 50%;
+    margin: auto;
+    z-index: 10;
+}
+
+.alert {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    font-size: 54px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+/* ESTILOS PARA SOPORTE.HTML FINAL */
+
+/* ESTILOS PARA INVENTARIO.HTML INICIO */
+.containerinventario{
+    display: flex;
+    margin-top: 10px;
+}
+
+.maininventario{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.inventario{
+    display: flex;
+    flex-direction: column;
+    align-self: center;
+    text-align: center;
+    box-shadow: 0 0 55px 2px #0003;
+}
+
+.equipos, .enfermedades{
+    background: #4a11;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #0004;
+    border-radius: 5px;
+    margin: 10px;
+    padding: 10px;
+    gap: 30px;
+}
+
+
+.equipos > div, .enfermedades > div{
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+
+.equipo, 
+.insumos,
+.proveedor,
+.plaga,
+.enfermedad,
+.tratamiento {
+    padding: 30px;
+    column-gap: 70px;
+    align-items: center;
+}
+
+.form__inventario{
+    padding: 10px;
+    margin: 0;
+}
+/* ESTILOS PARA INVENTARIO.HTML FINAL */

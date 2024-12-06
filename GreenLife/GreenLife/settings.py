@@ -27,6 +27,9 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+LOGIN_REDIRECT_URL = '/home/cliente'  # Redirige al índice después de iniciar sesión
+LOGOUT_REDIRECT_URL = '/'  # Redirige al índice después de cerrar sesión
+
 
 # Application definition
 

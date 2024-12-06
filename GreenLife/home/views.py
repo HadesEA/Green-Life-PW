@@ -1,15 +1,25 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth import login, authenticate
+from django.contrib import messages
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
+from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
+import csv
+import os
+from django.conf import settings
 from random import randrange
-from .forms import RegistroCombinadoForm
-from .models import Cultivo, Counter, CounterHT, CounterMQ7, CounterMQ8, CounterTC, CounterTF, CounterTS, CounterLUX, CounterPH, CounterTDS, CounterLluvia, CounterDistancia
+from datetime import timedelta
+from .forms import RegistroCombinadoForm, EventoSoporteForm, RegistroForm, PrediccionForm, ProveedorForm, PlagaForm, EnfermedadForm, TratamientoForm, EquipoForm, InsumoForm
+from .models import (Cultivo, Counter, CounterHT, CounterMQ7, CounterMQ8, CounterTC, CounterTF, CounterTS, 
+CounterLUX, CounterPH, CounterTDS, CounterLluvia, CounterDistancia, EventoSoporte, Cosecha, Siembra, Riego, Insumo, Proveedor, Equipo, Enfermedad, Plaga, Tratamiento)
 
 
 # Create your views here.
-
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
 class index(generic.View):
     template_name = "home/index.html"
@@ -24,7 +34,7 @@ class index(generic.View):
         user = authenticate(username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect("home:index")
+            return redirect("home:cliente")
         else:
             return redirect("home:index")
 
@@ -43,14 +53,15 @@ def soporte(request):
 def prediccion(request):
     return render(request, 'home/prediccion.html')
 
+def inventario(request):
+    return render(request, 'home/inventario.html')
+
 
 
 
 
 # Vistas de los formularios
 def registro_combinado(request):
-    print("Método: ", request.method)
-    print("Datos POST recibidos: ", request.POST)
     form = RegistroCombinadoForm()
     
     # Poblar el campo select con datos de la base de datos
@@ -75,6 +86,168 @@ def registro_combinado(request):
 
     return render(request, 'home/cliente.html', {'form': form})
 
+def registrar_soporte(request):
+    if request.method == 'POST':
+        form = EventoSoporteForm(request.POST)
+        if form.is_valid():
+            form.guardar()
+            messages.success(request, 'Formulario enviado con éxito')
+            return redirect('home:soporte')  # Redirigir después de guardar
+    else:
+        form = EventoSoporteForm()
+
+    return render(request, 'home/soporte.html', {'form': form})
+
+
+
+def register(request):
+    if request.method == 'POST':
+        form = RegistroForm(request.POST)
+        if form.is_valid():
+            user = form.save(commit=False)
+            user.set_password(form.cleaned_data['password'])
+            user.save()
+            login(request, user)
+            return redirect('home:cliente')  # Redirige al registro de cliente después del registro
+    else:
+        form = RegistroForm()
+    return render(request, 'home/register.html', {'form': form})
+
+def prediccion_view(request):
+    csv_path = os.path.join(settings.BASE_DIR, 'home', 'data', 'predicciones_9.csv')
+    recomendaciones = {}
+
+    if request.method == 'POST':
+        form = PrediccionForm(request.POST)
+        if form.is_valid():
+            # Obtener datos del formulario
+            fecha_riego = form.cleaned_data['fecha_riego']
+            tiempo_riego = form.cleaned_data['tiempo_riego']
+
+            fecha_cosecha = form.cleaned_data['fecha_cosecha']
+            tiempo_cosecha = form.cleaned_data['tiempo_cosecha']
+
+            fecha_siembra = form.cleaned_data['fecha_siembra']
+            tiempo_siembra = form.cleaned_data['tiempo_siembra']
+
+            fecha_insumo = form.cleaned_data['fecha_insumo']
+            tiempo_insumo = form.cleaned_data['tiempo_insumo']
+
+            # Calcular fechas recomendadas
+            recomendaciones['riego'] = fecha_riego + timedelta(days=tiempo_riego)
+            recomendaciones['cosecha'] = fecha_cosecha + timedelta(days=tiempo_cosecha)
+            recomendaciones['siembra'] = fecha_siembra + timedelta(days=tiempo_siembra)
+            recomendaciones['insumo'] = fecha_insumo + timedelta(days=tiempo_insumo)
+
+            if fecha_cosecha and tiempo_cosecha:
+                Cosecha.objects.create(
+                    siembra=None,
+                    fecha_cosecha=fecha_cosecha,
+                    tiempo_cosecha=tiempo_cosecha,
+                    cantidad=0  # Ajusta si tienes datos de cantidad inicial
+                )
+
+            if fecha_siembra and tiempo_siembra:
+                Siembra.objects.create(
+                    fecha_siembra=fecha_siembra,
+                    tiempo_siembra=tiempo_siembra,
+                    cultivo=None,  # Cambia según la lógica de cultivo
+                    parcela=None  # Cambia según la lógica de parcela
+                )
+
+            if fecha_insumo and tiempo_insumo:
+                Insumo.objects.create(
+                    nombre='Insumo Default',  # Cambia si tienes un nombre específico
+                    tipo='Tipo Default',  # Cambia según la lógica de tipo
+                    fecha_insumo=fecha_insumo,
+                    tiempo_insumo=tiempo_insumo,
+                    unidad_medida='kg'  # Ajusta la unidad si es necesario
+                )
+
+            if fecha_riego and tiempo_riego:
+                Riego.objects.create(
+                    fecha_riego=fecha_riego,
+                    tiempo_riego=tiempo_riego  # Asume que duracion es un campo en Riego
+                )
+
+            # Opcional: Guardar datos en un archivo CSV
+            with open(csv_path, 'w', newline='') as csvfile:
+                writer = csv.writer(csvfile)
+                writer.writerow(['Evento', 'Fecha Recomendación'])
+                for evento, fecha in recomendaciones.items():
+                    writer.writerow([evento, fecha])
+    else:
+        form = PrediccionForm()
+
+    return render(request, 'home/prediccion.html', {'form': form, 'recomendaciones': recomendaciones})
+
+def inventario_view(request):
+    # Formularios
+    proveedor_form = ProveedorForm(request.POST or None)
+    plaga_form = PlagaForm(request.POST or None)
+    enfermedad_form = EnfermedadForm(request.POST or None)
+    tratamiento_form = TratamientoForm(request.POST or None)
+    equipo_form = EquipoForm(request.POST or None)
+    insumo_form = InsumoForm(request.POST or None)
+
+    if request.method == 'POST':
+        # Guardar Proveedor
+        if 'registrar_proveedor' in request.POST and proveedor_form.is_valid():
+            proveedor_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Plaga
+        elif 'registrar_plaga' in request.POST and plaga_form.is_valid():
+            plaga_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Enfermedad
+        elif 'registrar_enfermedad' in request.POST and enfermedad_form.is_valid():
+            enfermedad_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Tratamiento
+        elif 'registrar_tratamiento' in request.POST and tratamiento_form.is_valid():
+            tratamiento_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Equipo
+        elif 'registrar_equipo' in request.POST and equipo_form.is_valid():
+            equipo_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Insumo
+        elif 'registrar_insumo' in request.POST and insumo_form.is_valid():
+            insumo_form.save()
+            return redirect('home:inventario')
+
+    # Consultar datos existentes
+    proveedores = Proveedor.objects.all()
+    plagas = Plaga.objects.all()
+    enfermedades = Enfermedad.objects.all()
+    tratamientos = Tratamiento.objects.all()
+    equipos = Equipo.objects.all()
+    insumos = Insumo.objects.all()
+
+    return render(request, 'home/inventario.html', {
+        'proveedor_form': proveedor_form,
+        'plaga_form': plaga_form,
+        'enfermedad_form': enfermedad_form,
+        'tratamiento_form': tratamiento_form,
+        'equipo_form': equipo_form,
+        'insumo_form': insumo_form,
+        'proveedores': proveedores,
+        'plagas': plagas,
+        'enfermedades': enfermedades,
+        'tratamientos': tratamientos,
+        'equipos': equipos,
+        'insumos': insumos,
+    })
+
+
+
+
+# Vistas para las gráficas
 
 # Endpoint para datos dinámicos
 def obtener_datos_relacionados(request):
@@ -236,3 +409,4 @@ def obtener_datos_distancia(request):
 
     # Devolver los datos como JSON
     return JsonResponse({"data": data})
+

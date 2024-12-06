@@ -5,7 +5,7 @@
 Graficas agua
 {% endblock boton %}
 {% block content %}
-    <div class="container">
+    <div class="containergraficas">
         <section class="nav__sidebar">
             <nav class="nav__sidebar">
                 <ul class="sidebar">
@@ -25,7 +25,8 @@ Graficas agua
                         <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
                     </div>
-                    <li class="sidebar__item"><a href="" class="item__sidebar monitoreo">Predicción</a></li>
+                    <li class="sidebar__item"><a href="{% url 'home:prediccion' %}" class="item__sidebar monitoreo">Predicción</a></li>
+                    <li class="sidebar__item"><a href="{% url 'home:inventario' %}" class="item__sidebar monitoreo">Inventario</a></li>
                 </ul>
             </nav>
         </section>

@@ -11,7 +11,7 @@ try:
     firebase_admin.get_app()
 except ValueError:
     # Inicializa la app con las credenciales y la URL de la base de datos
-    cred = credentials.Certificate(os.path.join(BASE_DIR, 'static', 'greenlife-2023-firebase-adminsdk-tj7el-320309087c.json'))
+    cred = credentials.Certificate(os.path.join(BASE_DIR, 'static', 'greenlife-2023-firebase-adminsdk-tj7el-a2b290fbce.json'))
     firebase_admin.initialize_app(cred, {
         'databaseURL': 'https://greenlife-2023-default-rtdb.firebaseio.com/'
     })

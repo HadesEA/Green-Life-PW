@@ -61,9 +61,6 @@ def sincronizar_datos_firebase():
                 if key == "CounterHT":
                     print(f"Depurando CounterHT: nodo={nodo}, valor={valor}")
 
-                # Depuración general: Imprime todos los datos que intentas guardar
-                print(f"Sincronizando tabla {key}: nodo={nodo}, valor={valor}")
-
                 # Actualiza o crea registros
                 modelo.objects.update_or_create(
                     nodo=str(nodo),

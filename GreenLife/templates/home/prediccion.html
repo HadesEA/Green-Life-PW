@@ -1,6 +1,52 @@
+{% extends "base/base.html" %}
 {% block title %}
 Green Life - Prediction
 {% endblock title %}
 {% block content %}
-
+<div class="containerprediccion">
+    <section class="nav__sidebar">
+        <nav class="nav__sidebar">
+            <ul class="sidebar">
+                <li class="sidebar__item"><a href="{% url 'home:graphics' %}" class="item__sidebar monitoreo">Monitoreo de suelo</a></li>
+                <div class="suelo">
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Humedad</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Gases</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Intensidad luminica</p></li>
+                </div>
+                <li class="sidebar__item"><a href="{% url 'home:graphicsagua' %}" class="item__sidebar monitoreo">Monitoreo de agua</a></li>
+                <div class="agua">
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Conductividad</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
+                    <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
+                </div>
+                <li class="sidebar__item"><a href="" class="item__sidebar monitoreo active">Predicción</a></li>
+                <li class="sidebar__item"><a href="{% url 'home:inventario' %}" class="item__sidebar monitoreo">Inventario</a></li>
+            </ul>
+        </nav>
+    </section>
+    <main class="mainprediccion">
+        <div class="ingresodatos">
+            <h2>Predicción de Fechas</h2>
+            <form method="post">
+                {% csrf_token %}
+                {{ form.as_p }}
+                <button type="submit" class="btn btn-primary">Calcular</button>
+            </form>
+        </div>
+        <div class="muestradatos">
+            <h2>Fechas Recomendadas</h2>
+            {% if recomendaciones %}
+                <ul>
+                    {% for evento, fecha in recomendaciones.items %}
+                        <li>{{ evento|title }}: {{ fecha }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+    </main>
+</div>
 {% endblock content %}
