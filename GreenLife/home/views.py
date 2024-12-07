@@ -1,6 +1,9 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth import login, authenticate
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
+from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.models import User
 from django.contrib.auth import logout
@@ -12,9 +15,7 @@ from django.conf import settings
 from random import randrange
 from datetime import timedelta
 from .forms import RegistroCombinadoForm, EventoSoporteForm, RegistroForm, PrediccionForm, ProveedorForm, PlagaForm, EnfermedadForm, TratamientoForm, EquipoForm, InsumoForm
-from .models import (Cultivo, Counter, CounterHT, CounterMQ7, CounterMQ8, CounterTC, CounterTF, CounterTS, 
-CounterLUX, CounterPH, CounterTDS, CounterLluvia, CounterDistancia, EventoSoporte, Cosecha, Siembra, Riego, Insumo, Proveedor, Equipo, Enfermedad, Plaga, Tratamiento)
-
+from .models import (Cultivo, Counter, CounterHT, CounterMQ7, CounterMQ8, CounterTC, CounterTF, CounterTS, CounterLUX, CounterPH, CounterTDS, CounterLluvia, CounterDistancia, EventoSoporte, Cosecha, Siembra, Riego, Insumo, Proveedor, Equipo, Enfermedad, Plaga, Tratamiento)
 
 # Create your views here.
 def logout_view(request):
@@ -410,3 +411,116 @@ def obtener_datos_distancia(request):
     # Devolver los datos como JSON
     return JsonResponse({"data": data})
 
+
+def generar_pdf_agua(request):
+    # Crear el objeto de respuesta HTTP para el PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_agua.pdf"'
+
+    # Crear el canvas
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    # Título del PDF
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(100, height - 50, "Reporte de Condiciones del Agua")
+    y_position = height - 100
+
+    # Extraer los datos de las tablas relacionadas con agua
+    p.setFont("Helvetica", 12)
+
+    p.drawString(50, y_position, "Temperatura del Suelo:")
+    y_position -= 20
+    for temperatura in CounterTC.objects.all():
+        p.drawString(70, y_position, f"Nodo {temperatura.nodo}: {temperatura.cntTC} °C")
+        y_position -= 20
+    
+    p.drawString(50, y_position, "Nivel del Agua:")
+    y_position -= 20
+    for distancia in CounterDistancia.objects.all():
+        p.drawString(70, y_position, f"Nodo {distancia.nodo}: {distancia.cntDistancia} cm")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Lluvia:")
+    y_position -= 20
+    for lluvia in CounterLluvia.objects.all():
+        p.drawString(70, y_position, f"Nodo {lluvia.nodo}: {lluvia.cntLluvia} mm")
+        y_position -= 20
+
+    p.drawString(50, y_position, "pH:")
+    y_position -= 20
+    for ph in CounterPH.objects.all():
+        p.drawString(70, y_position, f"Nodo {ph.nodo}: {ph.cntPH}")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Conductividad Eléctrica (TDS):")
+    y_position -= 20
+    for tds in CounterTDS.objects.all():
+        p.drawString(70, y_position, f"Nodo {tds.nodo}: {tds.cntTDS} ppm")
+        y_position -= 20
+
+    # Finalizar el PDF
+    p.showPage()
+    p.save()
+
+    return response
+
+
+def generar_pdf_suelo(request):
+    # Crear el objeto de respuesta HTTP para el PDF
+    response = HttpResponse(content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="reporte_suelo.pdf"'
+
+    # Crear el canvas
+    p = canvas.Canvas(response, pagesize=letter)
+    width, height = letter
+
+    # Título del PDF
+    p.setFont("Helvetica-Bold", 16)
+    p.drawString(100, height - 50, "Reporte de Condiciones del Suelo")
+    y_position = height - 100
+
+    # Extraer los datos de las tablas relacionadas con suelo
+    p.setFont("Helvetica", 12)
+
+    p.drawString(50, y_position, "Temperatura del Suelo:")
+    y_position -= 20
+    for temperatura in CounterTC.objects.all():
+        p.drawString(70, y_position, f"Nodo {temperatura.nodo}: {temperatura.cntTC} °C")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Humedad:")
+    y_position -= 20
+    for humedad in Counter.objects.all():
+        p.drawString(70, y_position, f"Nodo {humedad.nodo}: {humedad.cnt}%")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Intensidad Lumínica (LUX):")
+    y_position -= 20
+    for lux in CounterLUX.objects.all():
+        p.drawString(70, y_position, f"Nodo {lux.nodo}: {lux.cntLUX} lux")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Concentración de Gases:")
+    y_position -= 20
+    for mq7 in CounterMQ7.objects.all():
+        p.drawString(70, y_position, f"Nodo {mq7.nodo}: {mq7.cntMQ7} mq7")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Concentración de Gases:")
+    y_position -= 20
+    for mq8 in CounterMQ8.objects.all():
+        p.drawString(70, y_position, f"Nodo {mq8.nodo}: {mq8.cntMQ8} mq8")
+        y_position -= 20
+
+    p.drawString(50, y_position, "Nivel pH:")
+    y_position -= 20
+    for ph in CounterPH.objects.all():
+        p.drawString(70, y_position, f"Nodo {ph.nodo}: {ph.cntPH} ph")
+        y_position -= 20
+
+    # Finalizar el PDF
+    p.showPage()
+    p.save()
+
+    return response

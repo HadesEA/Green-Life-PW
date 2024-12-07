@@ -136,7 +136,7 @@ body{
 .tabla{
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: space-around;
     align-items: start;
     gap: 10px;
 }
@@ -165,6 +165,7 @@ body{
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    order: 10;
 }
 
 .temperatura{
@@ -499,7 +500,7 @@ form h1{
 /* ESTILOS PARA INVENTARIO.HTML INICIO */
 .containerinventario{
     display: flex;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .maininventario{
@@ -522,7 +523,7 @@ form h1{
     flex-direction: column;
     border: 1px solid #0004;
     border-radius: 5px;
-    margin: 10px;
+    margin: 5px;
     padding: 10px;
     gap: 30px;
 }

@@ -69,7 +69,7 @@ class Insumo(models.Model):
 class AplicacionInsumo(models.Model):
     siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE)
     insumo = models.ForeignKey(Insumo, on_delete=models.CASCADE)
-    fecha_aplicacion = models.DateField()
+    fecha_aplicacion = models.DateField(default=now)
     cantidad = models.DecimalField(max_digits=10, decimal_places=2)
 
     def __str__(self):
@@ -85,7 +85,7 @@ class Proveedor(models.Model):
 
 class Clima(models.Model):
     parcela = models.ForeignKey(Parcela, on_delete=models.CASCADE)
-    fecha = models.DateField()
+    fecha = models.DateField(default=now)
     temperatura = models.DecimalField(max_digits=5, decimal_places=2)
     humedad = models.DecimalField(max_digits=5, decimal_places=2)
     precipitacion = models.DecimalField(max_digits=5, decimal_places=2)
@@ -110,7 +110,7 @@ class Enfermedad(models.Model):
 class Tratamiento(models.Model):
     siembra = models.ForeignKey(Siembra, on_delete=models.CASCADE, null=True)
     tipo = models.CharField(max_length=50)
-    fecha_tratamiento = models.DateField()
+    fecha_tratamiento = models.DateField(default=now)
     descripcion = models.TextField()
 
     def __str__(self):
@@ -121,7 +121,7 @@ class Tratamiento(models.Model):
 class Equipo(models.Model):
     nombre = models.CharField(max_length=100)
     tipo = models.CharField(max_length=50)
-    fecha_adquisicion = models.DateField()
+    fecha_adquisicion = models.DateField(default=now)
 
     def __str__(self):
         return self.nombre

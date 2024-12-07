@@ -47,6 +47,11 @@ document.addEventListener("DOMContentLoaded", function () {
           graficoTDS.setOption(opciones);
 
           const estadoTextoTDS = document.getElementById('estado-tds');
+          const recomendacionesTDS = {
+              "Bueno": "Los niveles de TDS son óptimos.",
+              "Regular": "Los niveles de TDS son moderados, monitoree los cambios.",
+              "Malo": "Los niveles de TDS son críticos, realice ajustes inmediatamente."
+          };
           const estadosTDS = valoresTDS.map(valor => {
               if (valor >= 500 && valor <= 1500) {
                   return 'Bueno';
@@ -56,10 +61,12 @@ document.addEventListener("DOMContentLoaded", function () {
                   return 'Malo';
               }
           });
-
-          // Mostrar el estado para cada nodo
           estadoTextoTDS.innerHTML = nodosTDS.map((nodo, index) => {
-              return `<b>${nodo}</b>: ${estadosTDS[index]}`;
+              const estado = estadosTDS[index];
+              return `
+                  <b>${nodo}</b>: ${estado}<br>
+                  <i>Recomendación: ${recomendacionesTDS[estado]}</i>
+              `;
           }).join('<br>');
 
       })
@@ -136,72 +143,162 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-  // Inicializar el gráfico para nivel del agua
-  var graficoDistancia = echarts.init(document.getElementById('grafico-distancia'));
+    // Inicializar el gráfico para nivel del agua
+    var graficoDistancia = echarts.init(document.getElementById('grafico-distancia'));
 
-  // Obtener los datos desde Django
-  fetch('/home/datos-distancia/')
-      .then(response => response.json())
-      .then(data => {
-          // Extraer los datos para el gráfico
-          const nodosDistancia = data.data.distancia.map(item => item.nodo);
-          const valoresDistancia = data.data.distancia.map(item => item.cnt_distancia);
+    // Obtener los datos desde Django
+    fetch('/home/datos-distancia/')
+        .then(response => response.json())
+        .then(data => {
+            // Extraer los datos para el gráfico
+            const nodosDistancia = data.data.distancia.map(item => item.nodo);
+            const valoresDistancia = data.data.distancia.map(item => item.cnt_distancia);
 
-          // Configuración del gráfico
-          var opciones = {
-              title: {
-                  text: 'Nivel del Agua',
-                  subtext: 'Mediciones de distancia del agua',
-                  left: 'center'
-              },
-              tooltip: {
-                  trigger: 'axis'
-              },
-              legend: {
-                  data: ['Nivel de Agua'],
-                  top: '15%'
-              },
-              xAxis: {
-                  type: 'category',
-                  data: nodosDistancia, // Usar los nodos como etiquetas del eje X
-                  name: 'Nodos'
-              },
-              yAxis: {
-                  type: 'value',
-                  name: 'Distancia'
-              },
-              series: [
-                  {
-                      name: 'Nivel de Agua',
-                      type: 'bar',
-                      data: valoresDistancia,
-                      color: '#37A2DA'
-                  }
-              ]
-          };
+            // Configuración del gráfico
+            var opciones = {
+                title: {
+                    text: 'Nivel del Agua',
+                    subtext: 'Mediciones de distancia del agua',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['Nivel de Agua'],
+                    top: '15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: nodosDistancia, // Usar los nodos como etiquetas del eje X
+                    name: 'Nodos'
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'Distancia'
+                },
+                series: [
+                    {
+                        name: 'Nivel de Agua',
+                        type: 'bar',
+                        data: valoresDistancia,
+                        color: '#37A2DA'
+                    }
+                ]
+            };
 
-          // Establecer las opciones del gráfico
-          graficoDistancia.setOption(opciones);
-          const estadoTextoDistancia = document.getElementById('estado-distancia');
-          const estadosDistancia = valoresDistancia.map(valor => {
-              if (valor <= 10) {
-                  return 'Bueno';
-              } else if (valor <= 20) {
-                  return 'Regular';
-              } else {
-                  return 'Malo';
-              }
-          }); 
-          // Mostrar el estado para cada nodo
-          estadoTextoDistancia.innerHTML = nodosDistancia.map((nodo, index) => {
-              return `<b>${nodo}</b>: ${estadosDistancia[index]}`;
-          }).join('<br>');
+            // Establecer las opciones del gráfico
+            graficoDistancia.setOption(opciones);
 
-      })
-      .catch(error => {
-          console.error('Error al obtener los datos:', error);
-      });
+            // Estados y recomendaciones
+            const estadoTextoDistancia = document.getElementById('estado-distancia');
+            const recomendacionesDistancia = {
+                "Bueno": "El nivel del agua es óptimo, no se requiere acción inmediata.",
+                "Regular": "El nivel del agua es moderado, considere verificar si es necesario ajustar el riego.",
+                "Malo": "El nivel del agua es crítico, es necesario aumentar la irrigación."
+            };
+
+            const estadosDistancia = valoresDistancia.map(valor => {
+                if (valor <= 10) {
+                    return 'Bueno';
+                } else if (valor <= 20) {
+                    return 'Regular';
+                } else {
+                    return 'Malo';
+                }
+            });
+
+            // Mostrar el estado y recomendación para cada nodo
+            estadoTextoDistancia.innerHTML = nodosDistancia.map((nodo, index) => {
+                const estado = estadosDistancia[index];
+                return `
+                    <b>${nodo}</b>: ${estado}<br>
+                    <i>Recomendación: ${recomendacionesDistancia[estado]}</i>
+                `;
+            }).join('<br>');
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
 });
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Inicializar el gráfico para pH
+    var graficoPH = echarts.init(document.getElementById('grafico-ph'));
+
+    // Obtener los datos desde Django
+    fetch('/home/datos-ph/')
+        .then(response => response.json())
+        .then(data => {
+            // Extraer los datos para el gráfico
+            const nodosPH = data.data.ph.map(item => item.nodo);
+            const valoresPH = data.data.ph.map(item => item.cnt_ph);
+
+            // Configuración del gráfico
+            var opciones = {
+                title: {
+                    text: 'Nivel de pH',
+                    subtext: 'Mediciones del nivel de pH',
+                    left: 'center'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                legend: {
+                    data: ['pH'],
+                    top: '15%'
+                },
+                xAxis: {
+                    type: 'category',
+                    data: nodosPH, // Usar los nodos como etiquetas del eje X
+                    name: 'Nodos'
+                },
+                yAxis: {
+                    type: 'value',
+                    name: 'pH'
+                },
+                series: [
+                    {
+                        name: 'pH',
+                        type: 'bar',
+                        data: valoresPH,
+                        color: '#91CC75'
+                    }
+                ]
+            };
+
+            // Establecer las opciones del gráfico
+            graficoPH.setOption(opciones);
+            const estadoTextoPH = document.getElementById('estado-ph');
+            const recomendacionesPH = {
+                "Bueno": "El nivel de pH es óptimo.",
+                "Regular": "El nivel de pH es moderado, considere ajustes pequeños.",
+                "Malo": "El nivel de pH es crítico, realice ajustes inmediatos."
+            };
+            const estadosPH = valoresPH.map(valor => {
+                if (valor >= 6.5 && valor <= 7.5) {
+                    return 'Bueno';
+                } else if ((valor >= 5.5 && valor < 6.5) || (valor > 7.5 && valor <= 8.5)) {
+                    return 'Regular';
+                } else {
+                    return 'Malo';
+                }
+            });
+            estadoTextoPH.innerHTML = nodosPH.map((nodo, index) => {
+                const estado = estadosPH[index];
+                return `
+                    <b>${nodo}</b>: ${estado}<br>
+                    <i>Recomendación: ${recomendacionesPH[estado]}</i>
+                `;
+            }).join('<br>');
+
+        })
+        .catch(error => {
+            console.error('Error al obtener los datos:', error);
+        });
+});
+
 
 document.addEventListener("DOMContentLoaded", function () {
   // Inicializar el gráfico para temperatura
@@ -316,5 +413,152 @@ document.addEventListener("DOMContentLoaded", function () {
     })
     .catch(error => {
       console.error('Error al obtener los datos:', error);
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    // Crear un arreglo global para recopilar elementos en estado crítico para las gráficas de agua
+    let elementosCriticosAgua = [];
+
+    // Función para mostrar notificaciones
+    function mostrarNotificacionAgua(elementosCriticos) {
+        const notificacionDiv = document.getElementById('notificacion-agua');
+
+        if (elementosCriticos.length > 0) {
+            // Construir el mensaje de alerta
+            const mensaje = `
+                ⚠️ <strong>Alerta:</strong> Los siguientes elementos están en estado crítico:<br>
+                <ul>
+                    ${elementosCriticos.map(el => `<li>${el}</li>`).join('')}
+                </ul>
+            `;
+            notificacionDiv.innerHTML = mensaje;
+            notificacionDiv.style.display = 'block'; // Mostrar el div
+
+            // Ocultar el mensaje después de 5 segundos
+            setTimeout(() => {
+                notificacionDiv.style.display = 'none';
+            }, 5000);
+        } else {
+            notificacionDiv.style.display = 'none'; // Asegurar que se oculta si no hay elementos críticos
+        }
+    }
+
+    // Procesar los datos de nivel del agua
+    const procesarDatosNivelAgua = () => {
+        return fetch('/home/datos-distancia/')
+            .then(response => response.json())
+            .then(data => {
+                const nodosDistancia = data.data.distancia.map(item => item.nodo || "Nodo Desconocido");
+                const valoresDistancia = data.data.distancia.map(item => item.cnt_distancia);
+
+                const estadosDistancia = valoresDistancia.map(valor => {
+                    if (valor <= 10) return 'Bueno';
+                    if (valor <= 20) return 'Regular';
+                    return 'Malo';
+                });
+
+                const criticosDistancia = nodosDistancia.filter((_, index) => estadosDistancia[index] === 'Malo')
+                    .map(nodo => `${nodo} (Nivel del Agua)`);
+
+                elementosCriticosAgua.push(...criticosDistancia);
+            });
+    };
+
+    // Procesar los datos de lluvia
+    const procesarDatosLluvia = () => {
+        return fetch('/home/datos-agua/')
+            .then(response => response.json())
+            .then(data => {
+                const nodosLluvia = data.data.lluvia.map(item => item.nodo || "Nodo Desconocido");
+                const valoresLluvia = data.data.lluvia.map(item => item.cnt_lluvia);
+
+                const estadosLluvia = valoresLluvia.map(valor => {
+                    if (valor > 50) return 'Bueno';
+                    if (valor > 20) return 'Regular';
+                    return 'Malo';
+                });
+
+                const criticosLluvia = nodosLluvia.filter((_, index) => estadosLluvia[index] === 'Malo')
+                    .map(nodo => `${nodo} (Lluvia)`);
+
+                elementosCriticosAgua.push(...criticosLluvia);
+            });
+    };
+
+    // Procesar los datos de temperatura
+    const procesarDatosTemperaturaAgua = () => {
+        return fetch('/home/datos-temperatura/')
+            .then(response => response.json())
+            .then(data => {
+                const nodosTemperaturaTC = data.data.tc.map(item => item.nodo || "Nodo Desconocido");
+                const valoresTemperaturaTC = data.data.tc.map(item => item.cnt_tc);
+
+                const estadosTemperaturaTC = valoresTemperaturaTC.map(valor => {
+                    if (valor >= 15 && valor <= 25) return 'Bueno';
+                    if (valor > 25 && valor <= 35 || valor >= 10 && valor < 15) return 'Regular';
+                    return 'Malo';
+                });
+
+                const criticosTemperaturaTC = nodosTemperaturaTC.filter((_, index) => estadosTemperaturaTC[index] === 'Malo')
+                    .map(nodo => `${nodo} (Temperatura TC)`);
+
+                elementosCriticosAgua.push(...criticosTemperaturaTC);
+            });
+    };
+
+    // Procesar los datos de pH
+    const procesarDatosPH = () => {
+        return fetch('/home/datos-ph/')
+            .then(response => response.json())
+            .then(data => {
+                const nodosPH = data.data.ph.map(item => item.nodo || "Nodo Desconocido");
+                const valoresPH = data.data.ph.map(item => item.cnt_ph);
+
+                const estadosPH = valoresPH.map(valor => {
+                    if (valor >= 6.5 && valor <= 7.5) return 'Bueno';
+                    if ((valor >= 5.5 && valor < 6.5) || (valor > 7.5 && valor <= 8.5)) return 'Regular';
+                    return 'Malo';
+                });
+
+                const criticosPH = nodosPH.filter((_, index) => estadosPH[index] === 'Malo')
+                    .map(nodo => `${nodo} (pH)`);
+
+                elementosCriticosAgua.push(...criticosPH);
+            });
+    };
+
+    // Procesar los datos de conductividad eléctrica (TDS)
+    const procesarDatosTDS = () => {
+        return fetch('/home/datos-tds/')
+            .then(response => response.json())
+            .then(data => {
+                const nodosTDS = data.data.tds.map(item => item.nodo || "Nodo Desconocido");
+                const valoresTDS = data.data.tds.map(item => item.cnt_tds);
+
+                const estadosTDS = valoresTDS.map(valor => {
+                    if (valor >= 500 && valor <= 1500) return 'Bueno';
+                    if (valor > 1500 && valor <= 2000) return 'Regular';
+                    return 'Malo';
+                });
+
+                const criticosTDS = nodosTDS.filter((_, index) => estadosTDS[index] === 'Malo')
+                    .map(nodo => `${nodo} (Conductividad Eléctrica)`);
+
+                elementosCriticosAgua.push(...criticosTDS);
+            });
+    };
+
+    // Ejecutar todas las funciones de procesamiento y mostrar las notificaciones
+    Promise.all([
+        procesarDatosNivelAgua(),
+        procesarDatosLluvia(),
+        procesarDatosTemperaturaAgua(),
+        procesarDatosPH(),
+        procesarDatosTDS()
+    ]).then(() => {
+        mostrarNotificacionAgua(elementosCriticosAgua);
+    }).catch(error => {
+        console.error('Error al procesar los datos de agua:', error);
     });
 });

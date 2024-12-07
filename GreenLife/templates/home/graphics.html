@@ -16,6 +16,7 @@
                         <li class="sidebar__item"><p href="" class="item__sidebar">Nivel de pH</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Gases</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Intensidad luminica</p></li>
+                        <a href="{% url 'home:reporte_suelo' %}" class="btn btn-primary">Descargar Reporte (PDF)</a>
                     </div>
                     <li class="sidebar__item"><a href="{% url 'home:graphicsagua' %}" class="item__sidebar monitoreo">Monitoreo de agua</a></li>
                     <div class="agua">
@@ -30,6 +31,7 @@
                 </ul>
             </nav>
         </section>
+        <div id="notificacion" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; display: none; background-color: #ffcccc; padding: 10px; margin: auto; border: 1px solid red; border-radius: 5px; color: #a00;"></div>
         <div class="tabla">
             <div class="intensidadluminica">
                 <h2><i class="fa fa-lightbulb" style="color: #cd0;" aria-hidden="true"></i> Intensidad luminica</h2>
@@ -58,6 +60,7 @@
             </div>
         </div>
     </div>
+
     
     <!-- Apache Echarts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/5.5.0/echarts.min.js"></script>

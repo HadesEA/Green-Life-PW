@@ -24,5 +24,7 @@ urlpatterns=[
     path('datos-agua/', views.obtener_datos_agua, name='datos-agua'),
     path('datos-distancia/', views.obtener_datos_distancia, name='datos-distancia'),
     path('prediccion/', views.prediccion_view, name='prediccion'),
-    path('inventario/', views.inventario_view, name='inventario')
+    path('inventario/', views.inventario_view, name='inventario'),
+    path('reporte_agua/', views.generar_pdf_agua, name='reporte_agua'),
+    path('reporte_suelo/', views.generar_pdf_suelo, name='reporte_suelo'),
 ]
