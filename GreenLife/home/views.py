@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views import generic
 from django.contrib.auth import login, authenticate
+from django.contrib.auth.decorators import login_required
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
 from django.http import HttpResponse
@@ -39,21 +40,26 @@ class index(generic.View):
         else:
             return redirect("home:index")
 
+@login_required
 def graphics(request):
     return render(request, 'home/graphics.html')
 
+@login_required
 def graphicsagua(request):
     return render(request, 'home/graphicsagua.html')
 
+@login_required
 def cliente(request):
     return render(request, 'home/cliente.html')
 
 def soporte(request):
     return render(request, 'home/soporte.html')
 
+@login_required
 def prediccion(request):
     return render(request, 'home/prediccion.html')
 
+@login_required
 def inventario(request):
     return render(request, 'home/inventario.html')
 
@@ -62,6 +68,7 @@ def inventario(request):
 
 
 # Vistas de los formularios
+@login_required
 def registro_combinado(request):
     form = RegistroCombinadoForm()
     
@@ -114,6 +121,7 @@ def register(request):
         form = RegistroForm()
     return render(request, 'home/register.html', {'form': form})
 
+@login_required
 def prediccion_view(request):
     csv_path = os.path.join(settings.BASE_DIR, 'home', 'data', 'predicciones_9.csv')
     recomendaciones = {}
@@ -182,6 +190,7 @@ def prediccion_view(request):
 
     return render(request, 'home/prediccion.html', {'form': form, 'recomendaciones': recomendaciones})
 
+@login_required
 def inventario_view(request):
     # Formularios
     proveedor_form = ProveedorForm(request.POST or None)
