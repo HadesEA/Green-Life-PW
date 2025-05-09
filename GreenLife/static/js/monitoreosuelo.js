@@ -452,27 +452,28 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Función para mostrar notificaciones
   function mostrarNotificacion(elementosCriticos) {
-      const notificacionDiv = document.getElementById('notificacion');
+    const notificacionDiv = document.getElementById('notificacion');
+    const contenidoDiv = document.getElementById('contenido-notificacion');
 
-      if (elementosCriticos.length > 0) {
-          // Construir el mensaje de alerta
-          const mensaje = `
-              ⚠️ <strong>Alerta:</strong> Los siguientes elementos están en estado crítico:<br>
-              <ul>
-                  ${elementosCriticos.map(el => `<li>${el}</li>`).join('')}
-              </ul>
-          `;
-          notificacionDiv.innerHTML = mensaje;
-          notificacionDiv.style.display = 'block'; // Mostrar el div
+    if (elementosCriticos.length > 0) {
+        const mensaje = `
+            ⚠️ <strong>Alerta:</strong> Los siguientes elementos están en estado crítico:<br>
+            <ul>
+                ${elementosCriticos.map(el => `<li>${el}</li>`).join('')}
+            </ul>
+        `;
+        contenidoDiv.innerHTML = mensaje;
+        notificacionDiv.style.display = 'block';
+    } else {
+        notificacionDiv.style.display = 'none';
+    }
 
-          // Ocultar el mensaje después de 5 segundos
-          setTimeout(() => {
-              notificacionDiv.style.display = 'none';
-          }, 5000);
-      } else {
-          notificacionDiv.style.display = 'none'; // Asegurar que se oculta si no hay elementos críticos
-      }
-  }
+    // Agregar evento para cerrar la notificación
+    const botonCerrar = document.getElementById('cerrar-notificacion');
+    botonCerrar.addEventListener('click', () => {
+        notificacionDiv.style.display = 'none';
+    });
+}
 
   // Cargar y procesar los datos para cada gráfico
   const procesarDatosHumedad = () => {

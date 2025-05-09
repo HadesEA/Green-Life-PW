@@ -423,26 +423,28 @@ document.addEventListener("DOMContentLoaded", function () {
     // Función para mostrar notificaciones
     function mostrarNotificacionAgua(elementosCriticos) {
         const notificacionDiv = document.getElementById('notificacion-agua');
-
+        const contenidoDiv = document.getElementById('contenido-notificacion');
+    
         if (elementosCriticos.length > 0) {
-            // Construir el mensaje de alerta
             const mensaje = `
                 ⚠️ <strong>Alerta:</strong> Los siguientes elementos están en estado crítico:<br>
                 <ul>
                     ${elementosCriticos.map(el => `<li>${el}</li>`).join('')}
                 </ul>
             `;
-            notificacionDiv.innerHTML = mensaje;
-            notificacionDiv.style.display = 'block'; // Mostrar el div
-
-            // Ocultar el mensaje después de 5 segundos
-            setTimeout(() => {
-                notificacionDiv.style.display = 'none';
-            }, 5000);
+            contenidoDiv.innerHTML = mensaje;
+            notificacionDiv.style.display = 'block';
         } else {
-            notificacionDiv.style.display = 'none'; // Asegurar que se oculta si no hay elementos críticos
+            notificacionDiv.style.display = 'none';
         }
+    
+        // Agregar evento para cerrar la notificación
+        const botonCerrar = document.getElementById('cerrar-notificacion');
+        botonCerrar.addEventListener('click', () => {
+            notificacionDiv.style.display = 'none';
+        });
     }
+    
 
     // Procesar los datos de nivel del agua
     const procesarDatosNivelAgua = () => {

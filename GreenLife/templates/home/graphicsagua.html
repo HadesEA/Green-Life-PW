@@ -24,14 +24,20 @@ Graficas agua
                         <li class="sidebar__item"><p href="" class="item__sidebar">Temperatura</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Nivel del agua</p></li>
                         <li class="sidebar__item"><p href="" class="item__sidebar">Lluvia</p></li>
-                        <a href="{% url 'home:reporte_agua' %}" class="btn btn-primary">Descargar Reporte de Agua (PDF)</a>
                     </div>
                     <li class="sidebar__item"><a href="{% url 'home:prediccion' %}" class="item__sidebar monitoreo">Predicción</a></li>
                     <li class="sidebar__item"><a href="{% url 'home:inventario' %}" class="item__sidebar monitoreo">Inventario</a></li>
                 </ul>
+                <a href="{% url 'home:reporte_agua' %}" class="btn btn-primary sidebar2 sidebar">Descargar Reporte de Agua (PDF)</a>
             </nav>
         </section>
-        <div id="notificacion-agua" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 1000; display: none; background-color: #ffcccc; padding: 10px; margin: auto; border: 1px solid red; border-radius: 5px; color: #a00;"></div>
+        <div style="display: flex; justify-content: center; width: 100%; position: absolute;">
+            <div id="notificacion-agua" style="position: absolute; top: 0; z-index: 1000; display: none; background-color: #ffcccc; padding: 10px; margin: auto; border: 1px solid red; border-radius: 5px; color: #a00;">
+                <button id="cerrar-notificacion" style="float: right; border: none; background: transparent; padding-left: 10px; font-weight: bold; font-size: 16px; cursor: pointer;">&times;</button>
+                <div id="contenido-notificacion"></div>
+            </div>
+        </div>
+        
         <div class="tabla">
 
             <div class="temperatura">

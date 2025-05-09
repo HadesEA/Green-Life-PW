@@ -10,7 +10,7 @@ urlpatterns=[
     path('graphics/', views.graphics, name='graphics'),
     path('login/', auth_views.LoginView.as_view(template_name='home/login.html'), name='login'),
     path('logout/', views.logout_view, name='logout'),
-    path('register/', views.register, name='register'),
+    # path('register/', views.register, name='register'),
     path('soporte/', views.registrar_soporte, name='soporte'),
     path('graphicsagua/', views.graphicsagua, name='graphicsagua'),
     path('cliente/', views.registro_combinado, name='cliente'),

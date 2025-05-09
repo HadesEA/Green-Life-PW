@@ -20,13 +20,12 @@
         </ul>
         <ul class="nav__list">
         {% if user.is_authenticated %}
-            <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-primary">Inicio</a></li>
+            <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-secondary">Inicio</a></li>
             <li class="list__item"><a href="{% url 'home:graphics' %}" class="item__link btn btn-outline-secondary">Graphics</a></li>
             <li class="list__item"><a href="{% url 'home:soporte' %}" class="item__link btn btn-outline-secondary">Soporte técnico</a></li>
             <li class="list__item"><a href="{% url 'home:logout' %}" class="item__link btn btn-outline-secondary">Cerrar sesión - {{ user.username}}</a></li>
         {% else %}
-            <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-primary">Inicio</a></li>
-            <li class="list__item"><a href="{% url 'home:soporte' %}" class="item__link btn btn-outline-secondary">Soporte técnico</a></li>
+            <li class="list__item"><a href="{% url 'home:index' %}" class="item__link btn btn-outline-secondary">Inicio</a></li>
             <li class="list__item"><a href="{% url 'home:login' %}" class="item__link btn btn-outline-secondary">Iniciar sesión</a></li>
         {% endif %}
         </ul>
