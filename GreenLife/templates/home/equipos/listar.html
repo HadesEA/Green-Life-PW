@@ -1,0 +1,31 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <h2>Equipos</h2>
+    <a href="{% url 'home:crear_equipo' %}" class="btn btn-primary mb-3">Nuevo equipo</a>
+    <a href="{% url 'home:inventario' %}" class="btn btn-primary mb-3">Regresar</a>
+    <table class="tabla-crud">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Tipo</th>
+                <th>Fecha de adquisición</th>
+                <th>Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for equipo in equipos %}
+            <tr>
+                <td>{{ equipo.nombre }}</td>
+                <td>{{ equipo.tipo }}</td>
+                <td>{{ equipo.fecha_adquisicion }}</td>
+                <td>
+                    <a href="{% url 'home:editar_equipo' equipo.id %}" class="btn btn-warning btn-sm accion">Editar</a>
+                    <a href="{% url 'home:eliminar_equipo' equipo.id %}" class="btn btn-danger btn-sm accion">Eliminar</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4">No hay equipos registrados.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

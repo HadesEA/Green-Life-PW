@@ -1,0 +1,9 @@
+{% extends 'base/base.html' %}
+{% block content %}
+    <h2>¿Eliminar enfermedad "{{ enfermedad.nombre }}"?</h2>
+    <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Eliminar</button>
+        <a href="{% url 'home:listar_enfermedades' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+{% endblock %}

@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views import generic
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
@@ -189,71 +189,6 @@ def prediccion_view(request):
         form = PrediccionForm()
 
     return render(request, 'home/prediccion.html', {'form': form, 'recomendaciones': recomendaciones})
-
-@login_required
-def inventario_view(request):
-    # Formularios
-    proveedor_form = ProveedorForm(request.POST or None)
-    plaga_form = PlagaForm(request.POST or None)
-    enfermedad_form = EnfermedadForm(request.POST or None)
-    tratamiento_form = TratamientoForm(request.POST or None)
-    equipo_form = EquipoForm(request.POST or None)
-    insumo_form = InsumoForm(request.POST or None)
-
-    if request.method == 'POST':
-        # Guardar Proveedor
-        if 'registrar_proveedor' in request.POST and proveedor_form.is_valid():
-            proveedor_form.save()
-            return redirect('home:inventario')
-
-        # Guardar Plaga
-        elif 'registrar_plaga' in request.POST and plaga_form.is_valid():
-            plaga_form.save()
-            return redirect('home:inventario')
-
-        # Guardar Enfermedad
-        elif 'registrar_enfermedad' in request.POST and enfermedad_form.is_valid():
-            enfermedad_form.save()
-            return redirect('home:inventario')
-
-        # Guardar Tratamiento
-        elif 'registrar_tratamiento' in request.POST and tratamiento_form.is_valid():
-            tratamiento_form.save()
-            return redirect('home:inventario')
-
-        # Guardar Equipo
-        elif 'registrar_equipo' in request.POST and equipo_form.is_valid():
-            equipo_form.save()
-            return redirect('home:inventario')
-
-        # Guardar Insumo
-        elif 'registrar_insumo' in request.POST and insumo_form.is_valid():
-            insumo_form.save()
-            return redirect('home:inventario')
-
-    # Consultar datos existentes
-    proveedores = Proveedor.objects.all()
-    plagas = Plaga.objects.all()
-    enfermedades = Enfermedad.objects.all()
-    tratamientos = Tratamiento.objects.all()
-    equipos = Equipo.objects.all()
-    insumos = Insumo.objects.all()
-
-    return render(request, 'home/inventario.html', {
-        'proveedor_form': proveedor_form,
-        'plaga_form': plaga_form,
-        'enfermedad_form': enfermedad_form,
-        'tratamiento_form': tratamiento_form,
-        'equipo_form': equipo_form,
-        'insumo_form': insumo_form,
-        'proveedores': proveedores,
-        'plagas': plagas,
-        'enfermedades': enfermedades,
-        'tratamientos': tratamientos,
-        'equipos': equipos,
-        'insumos': insumos,
-    })
-
 
 
 
@@ -533,3 +468,320 @@ def generar_pdf_suelo(request):
     p.save()
 
     return response
+
+
+@login_required
+def inventario_view(request):
+    # Formularios
+    proveedor_form = ProveedorForm(request.POST or None)
+    plaga_form = PlagaForm(request.POST or None)
+    enfermedad_form = EnfermedadForm(request.POST or None)
+    tratamiento_form = TratamientoForm(request.POST or None)
+    equipo_form = EquipoForm(request.POST or None)
+    insumo_form = InsumoForm(request.POST or None)
+
+    if request.method == 'POST':
+        # Guardar Proveedor
+        if 'registrar_proveedor' in request.POST and proveedor_form.is_valid():
+            proveedor_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Plaga
+        elif 'registrar_plaga' in request.POST and plaga_form.is_valid():
+            plaga_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Enfermedad
+        elif 'registrar_enfermedad' in request.POST and enfermedad_form.is_valid():
+            enfermedad_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Tratamiento
+        elif 'registrar_tratamiento' in request.POST and tratamiento_form.is_valid():
+            tratamiento_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Equipo
+        elif 'registrar_equipo' in request.POST and equipo_form.is_valid():
+            equipo_form.save()
+            return redirect('home:inventario')
+
+        # Guardar Insumo
+        elif 'registrar_insumo' in request.POST and insumo_form.is_valid():
+            insumo_form.save()
+            return redirect('home:inventario')
+
+    # Consultar datos existentes
+    proveedores = Proveedor.objects.all()
+    plagas = Plaga.objects.all()
+    enfermedades = Enfermedad.objects.all()
+    tratamientos = Tratamiento.objects.all()
+    equipos = Equipo.objects.all()
+    insumos = Insumo.objects.all()
+
+    return render(request, 'home/inventario.html', {
+        'proveedor_form': proveedor_form,
+        'plaga_form': plaga_form,
+        'enfermedad_form': enfermedad_form,
+        'tratamiento_form': tratamiento_form,
+        'equipo_form': equipo_form,
+        'insumo_form': insumo_form,
+        'proveedores': proveedores,
+        'plagas': plagas,
+        'enfermedades': enfermedades,
+        'tratamientos': tratamientos,
+        'equipos': equipos,
+        'insumos': insumos,
+    })
+
+# CRUD PROVEEDOR
+@login_required
+def listar_proveedores(request):
+    proveedores = Proveedor.objects.all()
+    return render(request, 'home/proveedores/listar.html', {'proveedores': proveedores})
+
+@login_required
+def crear_proveedor(request):
+    if request.method == 'POST':
+        form = ProveedorForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Proveedor creado correctamente.')
+            return redirect('home:listar_proveedores')
+    else:
+        form = ProveedorForm()
+    return render(request, 'home/proveedores/form.html', {'form': form, 'accion': 'Crear'})
+
+@login_required
+def editar_proveedor(request, pk):
+    proveedor = Proveedor.objects.get(pk=pk)
+    form = ProveedorForm(request.POST or None, instance=proveedor)
+    if form.is_valid():
+        form.save()
+        messages.success(request, 'Proveedor actualizado correctamente.')
+        return redirect('home:listar_proveedores')
+    return render(request, 'home/proveedores/form.html', {'form': form, 'accion': 'Editar'})
+
+@login_required
+def eliminar_proveedor(request, pk):
+    proveedor = Proveedor.objects.get(pk=pk)
+    if request.method == 'POST':
+        proveedor.delete()
+        messages.success(request, 'Proveedor eliminado correctamente.')
+        return redirect('home:listar_proveedores')
+    return render(request, 'home/proveedores/eliminar.html', {'proveedor': proveedor})
+
+# CRUD EQUIPOS
+@login_required
+def listar_equipos(request):
+    equipos = Equipo.objects.all()
+    return render(request, 'home/equipos/listar.html', {'equipos': equipos})
+
+@login_required
+def crear_equipo(request):
+    if request.method == 'POST':
+        form = EquipoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home:listar_equipos')
+    else:
+        form = EquipoForm()
+    return render(request, 'home/equipos/formulario.html', {'form': form, 'accion': 'Crear equipo'})
+
+@login_required
+def editar_equipo(request, equipo_id):
+    equipo = get_object_or_404(Equipo, id=equipo_id)
+    if request.method == 'POST':
+        form = EquipoForm(request.POST, instance=equipo)
+        if form.is_valid():
+            form.save()
+            return redirect('home:listar_equipos')
+    else:
+        form = EquipoForm(instance=equipo)
+    return render(request, 'home/equipos/formulario.html', {'form': form, 'accion': 'Editar equipo'})
+
+@login_required
+def eliminar_equipo(request, equipo_id):
+    equipo = get_object_or_404(Equipo, id=equipo_id)
+    if request.method == 'POST':
+        equipo.delete()
+        return redirect('home:listar_equipos')
+    return render(request, 'home/equipos/confirmar_eliminar.html', {'objeto': equipo})
+
+# CRUD INSUMOS
+# Listar insumos
+@login_required
+def listar_insumos(request):
+    insumos = Insumo.objects.all()
+    return render(request, 'home/insumos/listar.html', {'insumos': insumos})
+
+# Crear insumo
+@login_required
+def crear_insumo(request):
+    if request.method == 'POST':
+        form = InsumoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo registrado correctamente.')
+            return redirect('home:listar_insumos')
+    else:
+        form = InsumoForm()
+    return render(request, 'home/insumos/formulario.html', {'form': form, 'accion': 'Crear'})
+
+# Editar insumo
+@login_required
+def editar_insumo(request, insumo_id):
+    insumo = get_object_or_404(Insumo, id=insumo_id)
+    if request.method == 'POST':
+        form = InsumoForm(request.POST, instance=insumo)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Insumo actualizado correctamente.')
+            return redirect('home:listar_insumos')
+    else:
+        form = InsumoForm(instance=insumo)
+    return render(request, 'home/insumos/formulario.html', {'form': form, 'accion': 'Editar'})
+
+# Eliminar insumo
+@login_required
+def eliminar_insumo(request, insumo_id):
+    insumo = get_object_or_404(Insumo, id=insumo_id)
+    if request.method == 'POST':
+        insumo.delete()
+        messages.success(request, 'Insumo eliminado correctamente.')
+        return redirect('home:listar_insumos')
+    return render(request, 'home/insumos/confirmar_eliminar.html', {'insumo': insumo})
+
+
+###     CRUD plaga     ###
+# Listar plagas
+@login_required
+def listar_plagas(request):
+    plagas = Plaga.objects.all()
+    return render(request, 'home/plagas/listar.html', {'plagas': plagas})
+
+# Crear plaga
+@login_required
+def crear_plaga(request):
+    if request.method == 'POST':
+        form = PlagaForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Plaga registrada correctamente.')
+            return redirect('home:listar_plagas')
+    else:
+        form = PlagaForm()
+    return render(request, 'home/plagas/formulario.html', {'form': form, 'accion': 'Crear'})
+
+# Editar plaga
+@login_required
+def editar_plaga(request, plaga_id):
+    plaga = get_object_or_404(Plaga, id=plaga_id)
+    if request.method == 'POST':
+        form = PlagaForm(request.POST, instance=plaga)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Plaga actualizada correctamente.')
+            return redirect('home:listar_plagas')
+    else:
+        form = PlagaForm(instance=plaga)
+    return render(request, 'home/plagas/formulario.html', {'form': form, 'accion': 'Editar'})
+
+# Eliminar plaga
+@login_required
+def eliminar_plaga(request, plaga_id):
+    plaga = get_object_or_404(Plaga, id=plaga_id)
+    if request.method == 'POST':
+        plaga.delete()
+        messages.success(request, 'Plaga eliminada correctamente.')
+        return redirect('home:listar_plagas')
+    return render(request, 'home/plagas/confirmar_eliminar.html', {'plaga': plaga})
+
+###     CRUD Enfermedades     ###
+# Listar enfermedades
+@login_required
+def listar_enfermedades(request):
+    enfermedades = Enfermedad.objects.all()
+    return render(request, 'home/enfermedades/listar.html', {'enfermedades': enfermedades})
+
+# Crear enfermedad
+@login_required
+def crear_enfermedad(request):
+    if request.method == 'POST':
+        form = EnfermedadForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Enfermedad registrada correctamente.')
+            return redirect('home:listar_enfermedades')
+    else:
+        form = EnfermedadForm()
+    return render(request, 'home/enfermedades/formulario.html', {'form': form, 'accion': 'Crear'})
+
+# Editar enfermedad
+@login_required
+def editar_enfermedad(request, enfermedad_id):
+    enfermedad = get_object_or_404(Enfermedad, id=enfermedad_id)
+    if request.method == 'POST':
+        form = EnfermedadForm(request.POST, instance=enfermedad)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Enfermedad actualizada correctamente.')
+            return redirect('home:listar_enfermedades')
+    else:
+        form = EnfermedadForm(instance=enfermedad)
+    return render(request, 'home/enfermedades/formulario.html', {'form': form, 'accion': 'Editar'})
+
+# Eliminar enfermedad
+@login_required
+def eliminar_enfermedad(request, enfermedad_id):
+    enfermedad = get_object_or_404(Enfermedad, id=enfermedad_id)
+    if request.method == 'POST':
+        enfermedad.delete()
+        messages.success(request, 'Enfermedad eliminada correctamente.')
+        return redirect('home:listar_enfermedades')
+    return render(request, 'home/enfermedades/confirmar_eliminar.html', {'enfermedad': enfermedad})
+
+
+###     CRUD TRATAMIENTOS     ###
+# Listar tratamientos
+@login_required
+def listar_tratamientos(request):
+    tratamientos = Tratamiento.objects.all()
+    return render(request, 'home/tratamientos/listar.html', {'tratamientos': tratamientos})
+
+# Crear tratamiento
+@login_required
+def crear_tratamiento(request):
+    if request.method == 'POST':
+        form = TratamientoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tratamiento registrado correctamente.')
+            return redirect('home:listar_tratamientos')
+    else:
+        form = TratamientoForm()
+    return render(request, 'home/tratamientos/formulario.html', {'form': form, 'accion': 'Crear'})
+
+# Editar tratamiento
+@login_required
+def editar_tratamiento(request, tratamiento_id):
+    tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
+    if request.method == 'POST':
+        form = TratamientoForm(request.POST, instance=tratamiento)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Tratamiento actualizado correctamente.')
+            return redirect('home:listar_tratamientos')
+    else:
+        form = TratamientoForm(instance=tratamiento)
+    return render(request, 'home/tratamientos/formulario.html', {'form': form, 'accion': 'Editar'})
+
+# Eliminar tratamiento
+@login_required
+def eliminar_tratamiento(request, tratamiento_id):
+    tratamiento = get_object_or_404(Tratamiento, id=tratamiento_id)
+    if request.method == 'POST':
+        tratamiento.delete()
+        messages.success(request, 'Tratamiento eliminado correctamente.')
+        return redirect('home:listar_tratamientos')
+    return render(request, 'home/tratamientos/confirmar_eliminar.html', {'tratamiento': tratamiento})

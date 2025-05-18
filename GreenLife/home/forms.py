@@ -371,3 +371,9 @@ class InsumoForm(forms.ModelForm):
             'tiempo_insumo': forms.NumberInput(attrs={'class': 'form-control', 'placeholder': 'Tiempo (días)'}),
             'unidad_medida': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Unidad de medida'}),
         }
+
+
+class EquipoForm(forms.ModelForm):
+    class Meta:
+        model = Equipo
+        fields = '__all__'
