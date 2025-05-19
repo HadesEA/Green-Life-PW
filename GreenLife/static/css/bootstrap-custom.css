@@ -3,6 +3,7 @@ body{
     padding: 0;
     font-family: sans-serif;
     background: linear-gradient(transparent, #4a19);
+    min-height: 963px;
     height: 100%;
 }
 
@@ -465,8 +466,8 @@ form h1{
     color: black;
     text-align: center;
     padding: 8px 0;
-    position: static;
-    bottom: 0;
+    position: sticky;
+    top: 950px;
     width: 100%;
 }
 
@@ -486,7 +487,8 @@ form h1{
 .ingresodatos, .muestradatos{
     padding: 40px;
     margin: auto;
-    box-shadow: 0 0 50px 2px #0009;
+    box-shadow: 0 0 50px 2px #0003;
+    border-radius: 5px;
 }
 
 /* ESTILOS PARA PREDICCION.HTML FINAL */
@@ -696,7 +698,13 @@ form h1{
 
 
 .tabla-muestra{
-
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 /* ESTILOS PARA INVENTARIO.HTML FINAL */
@@ -704,9 +712,9 @@ form h1{
 /* ESTILOS PARA LISTAR.HTML'S INICIO */
 /* Estilo general para tablas */
 .tabla-crud {
-    width: 100%;
     border-collapse: collapse;
-    margin-top: 20px;
+    margin: auto;
+    margin-bottom: 15px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
     border-radius: 8px;
@@ -747,6 +755,19 @@ form h1{
 
 .accion:hover {
     background-color: #4a1;
+}
+
+.botones-listar{
+    width: 50%;
+    margin: auto;
+    display: flex;
+    justify-content: space-around;
+}
+
+.h-listar{
+    width: 50%;
+    margin: auto;
+    margin-bottom: 15px;
 }
 
 /* ESTILOS PARA LISTAR.HTML'S FINAL */

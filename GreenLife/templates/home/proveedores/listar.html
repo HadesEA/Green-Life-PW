@@ -1,9 +1,11 @@
 {% extends 'base/base.html' %}
 {% block content %}
-<h2>Lista de Proveedores</h2>
-<a href="{% url 'home:crear_proveedor' %}" class="btn btn-primary">Nuevo Proveedor</a>
-<a href="{% url 'home:inventario' %}" class="btn btn-primary">Regresar</a>
-<table class="table">
+<h2 class="h-listar">Lista de Proveedores</h2>
+<div class="botones-listar">
+    <a href="{% url 'home:crear_proveedor' %}" class="btn btn-primary mb-3">Nuevo Proveedor</a>
+    <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+</div>
+<table class="tabla-crud">
     <thead>
         <tr>
             <th>Nombre</th>

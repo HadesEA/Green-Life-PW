@@ -1,8 +1,10 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <h2>Insumos</h2>
-    <a href="{% url 'home:crear_insumo' %}" class="btn btn-success mb-3">Agregar insumo</a>
-    <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+    <h2 class="h-listar">Insumos</h2>
+    <div class="botones-listar">
+        <a href="{% url 'home:crear_insumo' %}" class="btn btn-primary mb-3">Agregar insumo</a>
+        <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+    </div>
     <table class="tabla-crud">
         <thead>
             <tr>
@@ -23,7 +25,7 @@
                 <td>{{ insumo.tiempo_insumo }}</td>
                 <td>{{ insumo.unidad_medida }}</td>
                 <td>
-                    <a href="{% url 'home:editar_insumo' insumo.id %}" class="btn btn-primary btn-sm accion">Editar</a>
+                    <a href="{% url 'home:editar_insumo' insumo.id %}" class="btn btn-warning btn-sm accion">Editar</a>
                     <a href="{% url 'home:eliminar_insumo' insumo.id %}" class="btn btn-danger btn-sm accion">Eliminar</a>
                 </td>
             </tr>

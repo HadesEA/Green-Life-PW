@@ -1,8 +1,10 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <h2>Equipos</h2>
-    <a href="{% url 'home:crear_equipo' %}" class="btn btn-primary mb-3">Nuevo equipo</a>
-    <a href="{% url 'home:inventario' %}" class="btn btn-primary mb-3">Regresar</a>
+    <h2 class="h-listar">Equipos</h2>
+    <div class="botones-listar">
+        <a href="{% url 'home:crear_equipo' %}" class="btn btn-primary mb-3">Nuevo equipo</a>
+        <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+    </div>
     <table class="tabla-crud">
         <thead>
             <tr>

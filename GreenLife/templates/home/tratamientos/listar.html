@@ -1,8 +1,10 @@
 {% extends 'base/base.html' %}
 {% block content %}
-    <h2>Tratamientos</h2>
-    <a href="{% url 'home:crear_tratamiento' %}" class="btn btn-success mb-3">Agregar tratamiento</a>
-    <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+    <h2 class="h-listar">Tratamientos</h2>
+    <div class="botones-listar">
+        <a href="{% url 'home:crear_tratamiento' %}" class="btn btn-primary mb-3">Agregar tratamiento</a>
+        <a href="{% url 'home:inventario' %}" class="btn btn-success mb-3">Regresar</a>
+    </div>
     <table class="tabla-crud">
         <thead>
             <tr>
@@ -21,7 +23,7 @@
                 <td>{{ tratamiento.fecha_tratamiento }}</td>
                 <td>{{ tratamiento.descripcion }}</td>
                 <td>
-                    <a href="{% url 'home:editar_tratamiento' tratamiento.id %}" class="btn btn-primary btn-sm accion">Editar</a>
+                    <a href="{% url 'home:editar_tratamiento' tratamiento.id %}" class="btn btn-warning btn-sm accion">Editar</a>
                     <a href="{% url 'home:eliminar_tratamiento' tratamiento.id %}" class="btn btn-danger btn-sm accion">Eliminar</a>
                 </td>
             </tr>
