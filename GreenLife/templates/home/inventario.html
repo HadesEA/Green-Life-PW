@@ -29,8 +29,8 @@ Green Life - Inventario
             <div id="seccion-equipo" class="equipo">
                 <div class="registro__titulo">
                     <h3>Registrar Equipo</h3>
+                    <a href="{% url 'home:listar_equipos' %}" class="btn btn-info mb-3">Ver Equipos</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_equipos' %}" class="btn btn-info mb-3">Ver Equipos</a>
                         {% csrf_token %}
                         {{ equipo_form.as_p }}
                         <button type="submit" name="registrar_equipo" class="btn btn-primary">Registrar Equipo</button>
@@ -64,8 +64,8 @@ Green Life - Inventario
             <div id="seccion-insumo" class="insumos">
                 <div class="registro__titulo">
                     <h3>Registrar Insumo</h3>
+                    <a href="{% url 'home:listar_insumos' %}" class="btn btn-info mb-3">Ver Insumos</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_insumos' %}" class="btn btn-info mb-3">Ver Insumos</a>
                         {% csrf_token %}
                         {{ insumo_form.as_p }}
                         <button type="submit" name="registrar_insumo" class="btn btn-primary">Registrar Insumo</button>
@@ -102,8 +102,8 @@ Green Life - Inventario
             <div id="seccion-proveedor" class="proveedor">
                 <div class="registro__titulo">
                     <h3>Registrar Proveedor</h3>
+                    <a href="{% url 'home:listar_proveedores' %}" class="btn btn-info mb-3">Ver Proveedores</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_proveedores' %}" class="btn btn-info mb-3">Ver Proveedores</a>
                         {% csrf_token %}
                         {{ proveedor_form.as_p }}
                         <button type="submit" name="registrar_proveedor" class="btn btn-primary">Registrar Proveedor</button>
@@ -139,8 +139,8 @@ Green Life - Inventario
             <div id="seccion-plaga" class="plaga">
                 <div class="registro__titulo">
                     <h3>Registrar Plaga</h3>
+                    <a href="{% url 'home:listar_plagas' %}" class="btn btn-info mb-3">Ver Plagas</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_plagas' %}" class="btn btn-info mb-3">Ver Plagas</a>
                         {% csrf_token %}
                         {{ plaga_form.as_p }}
                         <button type="submit" name="registrar_plaga" class="btn btn-primary">Registrar Plaga</button>
@@ -173,8 +173,8 @@ Green Life - Inventario
             <div id="seccion-enfermedad" class="enfermedad">
                 <div class="registro__titulo">
                     <h3>Registrar Enfermedad</h3>
+                    <a href="{% url 'home:listar_enfermedades' %}" class="btn btn-info mb-3">Ver Enfermedades</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_enfermedades' %}" class="btn btn-info mb-3">Ver Enfermedades</a>
                         {% csrf_token %}
                         {{ enfermedad_form.as_p }}
                         <button type="submit" name="registrar_enfermedad" class="btn btn-primary">Registrar Enfermedad</button>
@@ -207,8 +207,8 @@ Green Life - Inventario
             <div id="seccion-tratamiento" class="tratamiento">
                 <div class="registro__titulo">
                     <h3>Registrar Tratamiento</h3>
+                    <a href="{% url 'home:listar_tratamientos' %}" class="btn btn-info mb-3">Ver Tratamientos</a>
                     <form method="post" class="form__inventario">
-                        <a href="{% url 'home:listar_tratamientos' %}" class="btn btn-info mb-3">Ver Tratamientos</a>
                         {% csrf_token %}
                         {{ tratamiento_form.as_p }}
                         <button type="submit" name="registrar_tratamiento" class="btn btn-primary">Registrar Tratamiento</button>

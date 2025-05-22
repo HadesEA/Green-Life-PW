@@ -25,7 +25,13 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           legend: {
             data: ['Counter', 'CounterHT'],
-            top: '15%'
+            top: '20%'
+          },
+          grid: {
+            top: '40%',
+            left: '30%',
+            right: '20%',
+            bottom: '10%'
           },
           xAxis: {
             type: 'category',
@@ -111,7 +117,13 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           legend: {
             data: ['MQ7', 'MQ8'],
-            top: '15%'
+            top: '20%'
+          },
+          grid: {
+            top: '40%',
+            left: '30%',
+            right: '15%',
+            bottom: '10%'
           },
           xAxis: {
             type: 'category',
@@ -227,8 +239,14 @@ document.addEventListener("DOMContentLoaded", function () {
             },
             legend: {
               data: ['TC', 'TF', 'TS'],
-              top: '15%' // Ajusta la posición de la leyenda para que no se sobreponga con el título
+              top: '20%' // Ajusta la posición de la leyenda para que no se sobreponga con el título
             },
+            grid: {
+                top: '40%',
+                left: '30%',
+                right: '15%',
+                bottom: '10%'
+              },
             xAxis: {
               type: 'category',
               data: nodosTemperaturaTC,
@@ -317,8 +335,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 legend: {
                     data: ['Intensidad'],
-                    top: '15%'
+                    top: '20%'
                 },
+                grid: {
+                    top: '40%',
+                    left: '30%',
+                    right: '15%',
+                    bottom: '10%'
+                },                
                 xAxis: {
                     type: 'category',
                     data: nodosLUX, // Usar los nodos como etiquetas del eje X
@@ -394,8 +418,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 legend: {
                     data: ['pH'],
-                    top: '15%'
+                    top: '20%'
                 },
+                grid: {
+                    top: '40%',
+                    left: '30%',
+                    right: '20%',
+                    bottom: '10%'
+                  },
                 xAxis: {
                     type: 'category',
                     data: nodosPH, // Usar los nodos como etiquetas del eje X

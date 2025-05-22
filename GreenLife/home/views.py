@@ -785,3 +785,21 @@ def eliminar_tratamiento(request, tratamiento_id):
         messages.success(request, 'Tratamiento eliminado correctamente.')
         return redirect('home:listar_tratamientos')
     return render(request, 'home/tratamientos/confirmar_eliminar.html', {'tratamiento': tratamiento})
+
+
+def registro_cliente(request):
+    if ya_registrado(request.user):
+        return redirect('home:graphics')  # si ya registró
+
+    if request.method == 'POST':
+        form = registro_cliente(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home:graphics')
+    else:
+        form = registro_cliente()
+    
+    return render(request, 'cliente.html', {'form': form, 'completo': ya_registrado(request.user)})
+
+def ya_registrado(user):
+    return Cultivo.objects.filter(finca=user).exists()

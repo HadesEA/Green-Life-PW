@@ -4,7 +4,7 @@
     <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
-        <button type="submit" class="btn btn-success">{{ accion }}</button>
+        <button type="submit" class="btn btn-success mb-3">{{ accion }}</button>
         <a href="{% url 'home:listar_tratamientos' %}" class="btn btn-secondary">Cancelar</a>
     </form>
 {% endblock %}

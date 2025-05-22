@@ -7,21 +7,21 @@ class RegistroCombinadoForm(forms.Form):
     # Campos del modelo Cliente
     cliente_nombre = forms.CharField(
         max_length=100,
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su nombre'})
     )
     cliente_apellido = forms.CharField(
         max_length=100,
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su apellido'})
     )
     cliente_email = forms.EmailField(
-        required=True,
+        required=False,
         widget=forms.EmailInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su correo electrónico'})
     )
     cliente_telefono = forms.CharField(
         max_length=15,
-        required=True,
+        required=False,
         widget=forms.TextInput(attrs={'class': 'form-control form_input campo', 'placeholder': 'Ingrese su número de teléfono'})
     )
 

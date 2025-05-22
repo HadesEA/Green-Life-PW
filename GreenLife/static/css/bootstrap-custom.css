@@ -2,6 +2,7 @@ body{
     margin: 0;
     padding: 0;
     font-family: sans-serif;
+    font-size: 1em;
     background: linear-gradient(transparent, #4a19);
     min-height: 963px;
     height: 100%;
@@ -10,7 +11,7 @@ body{
 .header__nav{
     display: flex;
     justify-content: space-between;
-    padding: 10px 120px;
+    padding: 10px 50px;
     background: linear-gradient(#4a1 1%, #4a1c, transparent);
 }
 
@@ -57,7 +58,6 @@ body{
 
 .nav__sidebar{
     height: 47vh;
-    width: 12vw;
     z-index: 3;
 }
 
@@ -155,19 +155,25 @@ body{
     height: 30vh;
     margin: 20px;
     padding: 0;
-    justify-content: end;
+    justify-content: center;
 }
 
 .intensidadluminica{
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .humedadsuelo{
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .concentraciongases{
@@ -175,12 +181,18 @@ body{
     background-color: #eee;
     border-radius: 5px;
     order: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .temperatura{
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nivelph{
@@ -189,6 +201,9 @@ body{
     border: 2px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 
@@ -231,6 +246,8 @@ h2{
     border-bottom: 1px solid #4a1;
     background-color: #4a12;
     border-radius: 10px;
+    min-width: auto;
+    width: 100%;
 }
 
 
@@ -245,30 +262,43 @@ h2{
     border: 1px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .temperatura{
     border: 1px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .conductividad{
     border: 1px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .lluvia{
-    border: 1px solid #4a13;
-    background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .nivelagua{
     border: 1px solid #4a13;
     background-color: #eee;
     border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 #temperaturaa{
@@ -299,14 +329,64 @@ h2{
 
 .estadosgraficas{
     text-align: center;
-    margin-bottom: 15px;
+    margin: 15px;
 }
+
+/* Contenedor principal de una sección */
+.tabla {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1300px;
+    margin: 0 auto;
+  }
+  
+  /* Cada grupo (gráfico + título + recomendación) */
+  .tabla > div {
+    background-color: #f9f9f9;
+    padding: 1rem 1.2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+  }
+  
+  /* Título de cada grupo */
+  .tabla h2 {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+  
+  /* Gráfica ECharts */
+  .chart {
+    height: 250px; /* Puedes ajustar si alguna gráfica necesita más espacio */
+    margin-bottom: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  
+  /* Recomendación */
+  .estadosgraficas {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+    background-color: #fff;
+    border-top: 1px solid #ccc;
+    border-radius: 6px;
+    margin-top: 1rem;
+  }
+  
 
 /* ESTILOS PARA CLIENTE.HTML INICIO */
 .containerform {
     margin: 0;
     margin-bottom: 90px;
-    height: 75vh;
+    min-height: 75vh;
+    height: 100%;
     font-family: sans-serif;
     color: #ddd;
     display: flex;
@@ -315,8 +395,8 @@ h2{
 
 form {
     background: linear-gradient(to top, #555, #333 10%, #222 20%, #000 60%);
-    padding: 20px 0;
-    min-width: 40%;
+    padding: 20px;
+    min-width: 20%;
     max-width: fit-content;
     min-height: 40%;
     max-height: fit-content;
@@ -325,9 +405,11 @@ form {
     margin-top: 40px;
     border-radius: 8px;
     font-size: 16px;
+    text-align: center;
     display: flex;
     justify-content: center;
     flex-direction: column;
+    align-items: center;
 }
 
 form h1{
@@ -346,11 +428,10 @@ form h1{
 }
 
 .form_cliente{
-    padding: 20px;
+    flex-wrap: wrap;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 90px;
 }
 
 .form__registro__sesion{
@@ -377,23 +458,33 @@ form h1{
     margin-top: 50px;
 }
 
-.section__cliente, .section__cultivo, .section__finca, .section__parcela, .section__estacion{
+.section__cultivo, .section__finca, .section__parcela, .section__estacion{
     width: fit-content;
-    flex: 1;
-    margin: 40px;
+    flex-wrap: wrap;
+    margin: 15px;
 }
+
 
 .registrocliente{
     width: 20%;
     flex: 1;
     align-self: center;
-    margin: 15px 0;
+    margin-bottom: 15px;
 }
 
 .campo{
     width: 100%;
 }
 
+
+
+.section__finca,
+.section__parcerla,
+.section__estacion,
+.section__cultivo {
+    flex: 1 1 220px;
+    padding: 1rem;
+}
 /* ESTILOS PARA CLIENTE.HTML FINAL */
 
 
@@ -618,7 +709,7 @@ form h1{
     width: 100%;
     padding: 30px;
     column-gap: 70px;
-    align-items: center;
+    align-items: start;
     justify-content: center;
 }
 

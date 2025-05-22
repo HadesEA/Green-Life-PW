@@ -22,7 +22,13 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               legend: {
                   data: ['TDS'],
-                  top: '15%'
+                  top: '20%'
+              },
+              grid: {
+                top: '40%',
+                left: '30%',
+                right: '20%',
+                bottom: '10%'
               },
               xAxis: {
                   type: 'category',
@@ -99,7 +105,13 @@ document.addEventListener("DOMContentLoaded", function () {
               },
               legend: {
                   data: ['Lluvia'],
-                  top: '15%'
+                  top: '20%'
+              },
+              grid: {
+                top: '40%',
+                left: '20%',
+                right: '20%',
+                bottom: '10%'
               },
               xAxis: {
                   type: 'category',
@@ -166,8 +178,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 legend: {
                     data: ['Nivel de Agua'],
-                    top: '15%'
+                    top: '20%'
                 },
+                grid: {
+                    top: '40%',
+                    left: '30%',
+                    right: '20%',
+                    bottom: '10%'
+                  },
                 xAxis: {
                     type: 'category',
                     data: nodosDistancia, // Usar los nodos como etiquetas del eje X
@@ -247,8 +265,14 @@ document.addEventListener("DOMContentLoaded", function () {
                 },
                 legend: {
                     data: ['pH'],
-                    top: '15%'
+                    top: '20%'
                 },
+                grid: {
+                    top: '40%',
+                    left: '30%',
+                    right: '20%',
+                    bottom: '10%'
+                  },
                 xAxis: {
                     type: 'category',
                     data: nodosPH, // Usar los nodos como etiquetas del eje X
@@ -337,7 +361,13 @@ document.addEventListener("DOMContentLoaded", function () {
           },
           legend: {
             data: ['TC', 'TF', 'TS'],
-            top: '15%' // Ajusta la posición de la leyenda para que no se sobreponga con el título
+            top: '20%' // Ajusta la posición de la leyenda para que no se sobreponga con el título
+          },
+          grid: {
+            top: '40%',
+            left: '30%',
+            right: '20%',
+            bottom: '10%'
           },
           xAxis: {
             type: 'category',

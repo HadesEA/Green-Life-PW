@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
+from urllib.parse import urlparse
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -25,7 +27,7 @@ SECRET_KEY = 'django-insecure-ugwb-7lj6j^f^et(u7!w+zyn4j9=t0!gf^4b1n2u11rv5v=)qe
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 LOGIN_URL = "/home/login/"
 LOGIN_REDIRECT_URL = '/home/cliente'  # Redirige al índice después de iniciar sesión
@@ -138,3 +140,9 @@ STATICFILES_DIRS = [
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+ngrok_url = os.environ.get('NGROK_URL')
+if ngrok_url:
+    domain = urlparse(ngrok_url).netloc
+    CSRF_TRUSTED_ORIGINS = [f'https://{domain}']
