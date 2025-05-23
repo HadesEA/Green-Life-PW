@@ -55,6 +55,7 @@ urlpatterns=[
     path('tratamientos/crear/', views.crear_tratamiento, name='crear_tratamiento'),
     path('tratamientos/editar/<int:tratamiento_id>/', views.editar_tratamiento, name='editar_tratamiento'),
     path('tratamientos/eliminar/<int:tratamiento_id>/', views.eliminar_tratamiento, name='eliminar_tratamiento'),
-    path('reporte_agua/', views.generar_pdf_agua, name='reporte_agua'),
-    path('reporte_suelo/', views.generar_pdf_suelo, name='reporte_suelo'),
+    path('reporte/pdf/', views.generar_pdf_suelo, name='reporte_pdf'),
+    path('reporte/agua/pdf/', views.generar_pdf_agua, name='reporte_agua_pdf'),
+    # path('reporte_suelo/', views.generar_pdf_suelo, name='reporte_suelo'),
 ]

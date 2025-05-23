@@ -10,6 +10,9 @@ from django.contrib.auth.models import User
 from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.http.response import JsonResponse
+from django.template.loader import render_to_string
+from weasyprint import HTML
+import tempfile
 import csv
 import os
 from django.conf import settings
@@ -356,118 +359,53 @@ def obtener_datos_distancia(request):
     return JsonResponse({"data": data})
 
 
+# views.py
 def generar_pdf_agua(request):
-    # Crear el objeto de respuesta HTTP para el PDF
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="reporte_agua.pdf"'
+    datos = {
+        "humedad": 55,
+        "temperatura": {"TC": 22, "TF": 71.6},
+        "ph": 7.2,
+        "conductividad": 450,
+        "nivel": "Medio",
+        "recomendaciones": [
+            {"sensor": "pH", "estado": "Estable"},
+            {"sensor": "Conductividad", "estado": "Aceptable"},
+            {"sensor": "Nivel de Agua", "estado": "Atento"},
+        ]
+    }
 
-    # Crear el canvas
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
+    html_string = render_to_string("reporte/reporte_agua_pdf.html", {"datos": datos})
 
-    # Título del PDF
-    p.setFont("Helvetica-Bold", 16)
-    p.drawString(100, height - 50, "Reporte de Condiciones del Agua")
-    y_position = height - 100
-
-    # Extraer los datos de las tablas relacionadas con agua
-    p.setFont("Helvetica", 12)
-
-    p.drawString(50, y_position, "Temperatura del Suelo:")
-    y_position -= 20
-    for temperatura in CounterTC.objects.all():
-        p.drawString(70, y_position, f"Nodo {temperatura.nodo}: {temperatura.cntTC} °C")
-        y_position -= 20
-    
-    p.drawString(50, y_position, "Nivel del Agua:")
-    y_position -= 20
-    for distancia in CounterDistancia.objects.all():
-        p.drawString(70, y_position, f"Nodo {distancia.nodo}: {distancia.cntDistancia} cm")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Lluvia:")
-    y_position -= 20
-    for lluvia in CounterLluvia.objects.all():
-        p.drawString(70, y_position, f"Nodo {lluvia.nodo}: {lluvia.cntLluvia} mm")
-        y_position -= 20
-
-    p.drawString(50, y_position, "pH:")
-    y_position -= 20
-    for ph in CounterPH.objects.all():
-        p.drawString(70, y_position, f"Nodo {ph.nodo}: {ph.cntPH}")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Conductividad Eléctrica (TDS):")
-    y_position -= 20
-    for tds in CounterTDS.objects.all():
-        p.drawString(70, y_position, f"Nodo {tds.nodo}: {tds.cntTDS} ppm")
-        y_position -= 20
-
-    # Finalizar el PDF
-    p.showPage()
-    p.save()
-
-    return response
-
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(output.name)
+        output.seek(0)
+        response = HttpResponse(output.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="reporte_agua.pdf"'
+        return response
 
 def generar_pdf_suelo(request):
-    # Crear el objeto de respuesta HTTP para el PDF
-    response = HttpResponse(content_type='application/pdf')
-    response['Content-Disposition'] = 'attachment; filename="reporte_suelo.pdf"'
+    # Aquí puedes obtener los datos actuales (ej. desde la base de datos)
+    datos = {
+        "intensidad": 62000,
+        "humedad": {"counter": 40, "counterHT": 25},
+        "temperatura": {"TC": 30, "TF": 86, "TS": 25},
+        "ph": 1.8,
+        "gases": {"MQ7": 1400, "MQ8": 400},
+        "recomendaciones": [
+            {"sensor": "LUX", "estado": "Bueno"},
+            {"sensor": "pH", "estado": "Crítico"},
+        ]
+    }
 
-    # Crear el canvas
-    p = canvas.Canvas(response, pagesize=letter)
-    width, height = letter
+    html_string = render_to_string("reporte/reporte_pdf.html", {"datos": datos})
 
-    # Título del PDF
-    p.setFont("Helvetica-Bold", 16)
-    p.drawString(100, height - 50, "Reporte de Condiciones del Suelo")
-    y_position = height - 100
+    with tempfile.NamedTemporaryFile(delete=True) as output:
+        HTML(string=html_string, base_url=request.build_absolute_uri()).write_pdf(output.name)
+        output.seek(0)
+        response = HttpResponse(output.read(), content_type='application/pdf')
+        response['Content-Disposition'] = 'attachment; filename="reporte_suelo.pdf"'
+        return response
 
-    # Extraer los datos de las tablas relacionadas con suelo
-    p.setFont("Helvetica", 12)
-
-    p.drawString(50, y_position, "Temperatura del Suelo:")
-    y_position -= 20
-    for temperatura in CounterTC.objects.all():
-        p.drawString(70, y_position, f"Nodo {temperatura.nodo}: {temperatura.cntTC} °C")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Humedad:")
-    y_position -= 20
-    for humedad in Counter.objects.all():
-        p.drawString(70, y_position, f"Nodo {humedad.nodo}: {humedad.cnt}%")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Intensidad Lumínica (LUX):")
-    y_position -= 20
-    for lux in CounterLUX.objects.all():
-        p.drawString(70, y_position, f"Nodo {lux.nodo}: {lux.cntLUX} lux")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Concentración de Gases:")
-    y_position -= 20
-    for mq7 in CounterMQ7.objects.all():
-        p.drawString(70, y_position, f"Nodo {mq7.nodo}: {mq7.cntMQ7} mq7")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Concentración de Gases:")
-    y_position -= 20
-    for mq8 in CounterMQ8.objects.all():
-        p.drawString(70, y_position, f"Nodo {mq8.nodo}: {mq8.cntMQ8} mq8")
-        y_position -= 20
-
-    p.drawString(50, y_position, "Nivel pH:")
-    y_position -= 20
-    for ph in CounterPH.objects.all():
-        p.drawString(70, y_position, f"Nodo {ph.nodo}: {ph.cntPH} ph")
-        y_position -= 20
-
-    # Finalizar el PDF
-    p.showPage()
-    p.save()
-
-    return response
 
 
 @login_required

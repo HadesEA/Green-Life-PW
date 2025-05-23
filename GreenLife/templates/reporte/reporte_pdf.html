@@ -1,0 +1,68 @@
+{% extends "base/base.html" %}
+{% load static %}
+{% block title %}Green Life - PDF{% endblock title %}
+{% block content %}
+<body>
+    <style>
+        .header__nav{display: none;}
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        h1 { color: green; text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-bottom: 20px; }
+        th, td { border: 1px solid #999; padding: 8px; text-align: center; }
+        .section { margin-bottom: 40px; }
+        .highlight { background-color: #e8f5e9; }
+    </style>
+    <h1>📋 Reporte de Monitoreo - Green Life</h1>
+
+    <div class="section">
+        <h2>🌞 Intensidad Lumínica</h2>
+        <p>Valor actual: {{ datos.intensidad }} LUX</p>
+    </div>
+
+    <div class="section">
+        <h2>💧 Humedad</h2>
+        <table>
+            <tr><th>Sensor</th><th>Valor</th></tr>
+            <tr><td>Counter</td><td>{{ datos.humedad.counter }}</td></tr>
+            <tr><td>CounterHT</td><td>{{ datos.humedad.counterHT }}</td></tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>🌡️ Temperatura</h2>
+        <table>
+            <tr><th>TC</th><th>TF</th><th>TS</th></tr>
+            <tr>
+                <td>{{ datos.temperatura.TC }}</td>
+                <td>{{ datos.temperatura.TF }}</td>
+                <td>{{ datos.temperatura.TS }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>⚗️ Nivel de pH</h2>
+        <p>Valor actual: {{ datos.ph }}</p>
+    </div>
+
+    <div class="section">
+        <h2>🌫️ Gases MQ7 y MQ8</h2>
+        <table>
+            <tr><th>MQ7</th><th>MQ8</th></tr>
+            <tr>
+                <td>{{ datos.gases.MQ7 }}</td>
+                <td>{{ datos.gases.MQ8 }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>✅ Recomendaciones</h2>
+        <ul>
+            {% for r in datos.recomendaciones %}
+            <li><strong>{{ r.sensor }}:</strong> {{ r.estado }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+{% endblock content %}

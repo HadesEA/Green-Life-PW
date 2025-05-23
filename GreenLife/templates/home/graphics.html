@@ -14,7 +14,8 @@
                     <li class="sidebar__item"><a href="{% url 'home:prediccion' %}" class="item__sidebar monitoreo">Predicción</a></li>
                     <li class="sidebar__item"><a href="{% url 'home:inventario' %}" class="item__sidebar monitoreo">Inventario</a></li>
                 </ul>
-                <a href="{% url 'home:reporte_suelo' %}" class="btn btn-primary sidebar2 sidebar">Descargar Reporte de suelo (PDF)</a>
+                {% comment %} <a href="{% url 'home:reporte_suelo' %}" class="btn btn-primary sidebar2 sidebar">Descargar Reporte de suelo (PDF)</a> {% endcomment %}
+                <a href="{% url 'home:reporte_pdf' %}" class="btn btn-primary sidebar2 sidebar">Descargar Reporte de suelo (PDF)</a>
             </nav>
         </section>
         <div style="display: flex; justify-content: center; width: 100%; position: absolute;">
